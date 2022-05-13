@@ -1,0 +1,1 @@
+"use strict";var e=require("../../common/vendor.js"),n=require("../../utils/index.js");const o=e.defineComponent({setup(o){const r=e.ref("Hello");return console.log("utils.fn1: ",n.fn1()),console.log("my.env: ",my.env),(n,o)=>({a:e.t(r.value)})}});qa.createPage(o);

@@ -1,0 +1,18 @@
+{
+  "pages": [
+    "pages/index/index"
+  ],
+  "window": {
+    "navigationBarTextStyle": "black",
+    "navigationBarTitleText": "uni-app",
+    "navigationBarBackgroundColor": "#F8F8F8",
+    "backgroundColor": "#F8F8F8"
+  },
+  "appType": "webapp",
+  "minPlatformVersion": 1070,
+  "name": "my-project-uniapp-vite",
+  "versionName": "1.0.0",
+  "versionCode": "100",
+  "package": "my-project-uniapp-vite",
+  "usingComponents": {}
+}

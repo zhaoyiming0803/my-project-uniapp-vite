@@ -8,15 +8,13 @@
 </template>
 
 <script setup lang="ts">
+import AuthingMove from './bundle'
 import { ref } from 'vue'
+
 const title = ref('Hello')
-// const utils = require('../../utils/index')
 
-import { fn1 } from '../../utils/index'
+console.log('Authing: ', Object.keys(AuthingMove))
 
-console.log('utils.fn1: ', fn1())
-// console.log('wx.env: ', wx.env) // 编译后运行时报错
-console.log('my.env: ', my.env)
 </script>
 
 <style>
