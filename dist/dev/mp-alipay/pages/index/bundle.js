@@ -12,7 +12,6 @@ var __webpack_modules__ = [
     (0, _global_api__WEBPACK_IMPORTED_MODULE_1__.initGlobalApi)(_instance__WEBPACK_IMPORTED_MODULE_0__["default"]);
     _instance__WEBPACK_IMPORTED_MODULE_0__["default"].version = "0.0.1-alpha.0";
     const __WEBPACK_DEFAULT_EXPORT__ = _instance__WEBPACK_IMPORTED_MODULE_0__["default"];
-    __webpack_require_authing__2.g.AuthingMove = _instance__WEBPACK_IMPORTED_MODULE_0__["default"];
   },
   (__unused_webpack_module, __webpack_exports_authing__2, __webpack_require_authing__2) => {
     __webpack_require_authing__2.r(__webpack_exports_authing__2);
@@ -61,16 +60,16 @@ var __webpack_modules__ = [
       "default": () => install
     });
     var _transform__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require_authing__2(6);
-    var _shared__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require_authing__2(7);
+    var _utils__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require_authing__2(7);
     function install(AuthingMove, options = {}) {
-      if (to === "uni") {
-        return;
-      }
       const {
         custom = {}
       } = options;
       const from = "wx";
-      const to = "uni";
+      const to = "ali";
+      if (["uni"].includes(to)) {
+        return;
+      }
       const transformedApi = (0, _transform__WEBPACK_IMPORTED_MODULE_0__["default"])({
         from,
         to,
@@ -84,7 +83,7 @@ var __webpack_modules__ = [
           }
           AuthingMove[api] = (...args) => transformedApi[api].apply(AuthingMove, args);
         } catch (e) {
-          (0, _shared__WEBPACK_IMPORTED_MODULE_1__.error)(`Call ${AuthingMove}.${api} error:` + JSON.stringify(e));
+          (0, _utils__WEBPACK_IMPORTED_MODULE_1__.error)(`Call ${AuthingMove}.${api} error:` + JSON.stringify(e));
         }
       });
     }
@@ -94,24 +93,18 @@ var __webpack_modules__ = [
     __webpack_require_authing__2.d(__webpack_exports_authing__2, {
       "default": () => transformApi
     });
-    var _shared__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require_authing__2(7);
-    var _platforms_wx_ali__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require_authing__2(8);
-    const fromMap = (0, _shared__WEBPACK_IMPORTED_MODULE_0__.generateFromMap)();
+    var _utils__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require_authing__2(7);
+    var _apis__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require_authing__2(8);
+    const fromMap = (0, _utils__WEBPACK_IMPORTED_MODULE_0__.generateFromMap)();
     function joinName(from = "", to = "") {
       const _from = `__authing_move_src_mode_${from}__`;
       return `${fromMap[_from]}_${to}`;
     }
     function transformApi(options) {
-      const envContext = (0, _shared__WEBPACK_IMPORTED_MODULE_0__.getEnvContext)();
-      const { from, to } = options;
-      const fromTo = joinName(from, to);
-      const platformMap = {
-        "wx_ali": (0, _platforms_wx_ali__WEBPACK_IMPORTED_MODULE_1__["default"])()
-      };
+      const envContext = (0, _utils__WEBPACK_IMPORTED_MODULE_0__.getEnvContext)();
       const needProxy = /* @__PURE__ */ Object.create(null);
-      const transformedApi = platformMap[fromTo] || {};
-      Object.keys(envContext).concat(Object.keys(transformedApi)).forEach((key) => {
-        needProxy[key] = envContext[key] || transformedApi[key];
+      Object.keys(envContext).concat(Object.keys(_apis__WEBPACK_IMPORTED_MODULE_1__)).forEach((key) => {
+        needProxy[key] = envContext[key] || _apis__WEBPACK_IMPORTED_MODULE_1__[key];
       });
       const apis = /* @__PURE__ */ Object.create(null);
       Object.keys(needProxy).forEach((api) => {
@@ -120,26 +113,26 @@ var __webpack_modules__ = [
           return;
         }
         apis[api] = (...args) => {
-          let from2 = options.from;
-          const to2 = options.to;
+          let from = options.from;
+          const to = options.to;
           if (args.length) {
-            from2 = args.pop();
-            if (typeof from2 !== "string" || !fromMap[from2]) {
-              args.push(from2);
-              from2 = options.from;
+            from = args.pop();
+            if (typeof from !== "string" || !fromMap[from]) {
+              args.push(from);
+              from = options.from;
             }
           }
-          const fromTo2 = joinName(from2, to2);
-          if (options.custom[fromTo2] && options.custom[fromTo2][api]) {
-            return options.custom[fromTo2][api].apply(this, args);
+          const fromTo = joinName(from, to);
+          if (options.custom[fromTo] && options.custom[fromTo][api]) {
+            return options.custom[fromTo][api].apply(this, args);
           }
-          if (platformMap[fromTo2] && platformMap[fromTo2][api]) {
-            return platformMap[fromTo2][api].apply(this, args);
+          if (_apis__WEBPACK_IMPORTED_MODULE_1__[api]) {
+            return _apis__WEBPACK_IMPORTED_MODULE_1__[api].apply(this, args);
           }
           if (envContext[api]) {
             return envContext[api].apply(this, args);
           }
-          (0, _shared__WEBPACK_IMPORTED_MODULE_0__.error)(`\u5F53\u524D\u5C0F\u7A0B\u5E8F\u73AF\u5883\u4E0D\u5B58\u5728 ${api} \u65B9\u6CD5`);
+          (0, _utils__WEBPACK_IMPORTED_MODULE_0__.error)(`\u5F53\u524D\u5C0F\u7A0B\u5E8F\u73AF\u5883\u4E0D\u5B58\u5728 ${api} \u65B9\u6CD5`);
         };
       });
       return apis;
@@ -149,22 +142,24 @@ var __webpack_modules__ = [
     __webpack_require_authing__2(1).default;
     __webpack_require_authing__2.r(__webpack_exports_authing__2);
     __webpack_require_authing__2.d(__webpack_exports_authing__2, {
-      "adaptOptions": () => adaptOptions,
+      "adaptOptions": () => adaptOptions2,
       "error": () => error,
       "generateFromMap": () => generateFromMap,
       "getEnvContext": () => getEnvContext,
-      "handleSuccess": () => handleSuccess,
+      "handleSuccess": () => handleSuccess2,
       "makeMap": () => makeMap,
       "noop": () => noop,
       "warn": () => warn
     });
     function getEnvContext() {
-      switch ("uni") {
+      const noopEnv = {};
+      switch ("ali") {
         case "wx":
-          return common_vendor.index;
+        case "Mpx":
+          return my;
         case "ali":
           return my;
-        case "swan":
+        case "baidu":
           return swan;
         case "qq":
           return qq;
@@ -172,8 +167,10 @@ var __webpack_modules__ = [
           return tt;
         case "jd":
           return jd;
-        case "qa":
+        case "qa_webview":
           return qa;
+        case "qa_ux":
+          return noopEnv;
         case "Taro":
           return Taro;
         case "uni":
@@ -181,7 +178,7 @@ var __webpack_modules__ = [
       }
     }
     function generateFromMap() {
-      const platforms = ["wx", "ali", "baidu", "qq", "tt", "jd", "qa"];
+      const platforms = ["wx", "ali", "baidu", "qq", "tt", "jd", "qa_webview", "qa_ux"];
       return platforms.reduce((map, platform) => {
         map[`__authing_move_src_mode_${platform}__`] = platform;
         return map;
@@ -203,7 +200,7 @@ var __webpack_modules__ = [
     }
     function noop() {
     }
-    function adaptOptions(originalOptions, matchedOptions, extraOptions) {
+    function adaptOptions2(originalOptions, matchedOptions, extraOptions) {
       let options = {};
       Object.keys(originalOptions).forEach((key) => {
         const _key = matchedOptions.hasOwnProperty(key) ? matchedOptions[key] : key;
@@ -214,7 +211,7 @@ var __webpack_modules__ = [
       options = Object.assign({}, options, extraOptions);
       return options;
     }
-    function handleSuccess(originalOptions, wrappedSuccess = noop, context) {
+    function handleSuccess2(originalOptions, wrappedSuccess = noop, context) {
       if (!originalOptions.success) {
         return;
       }
@@ -226,74 +223,114 @@ var __webpack_modules__ = [
   (__unused_webpack_module, __webpack_exports_authing__2, __webpack_require_authing__2) => {
     __webpack_require_authing__2.r(__webpack_exports_authing__2);
     __webpack_require_authing__2.d(__webpack_exports_authing__2, {
-      "default": () => getWxToAliApi
+      "clearStorage": () => _store_storage__WEBPACK_IMPORTED_MODULE_3__.clearStorage,
+      "login": () => _login_login__WEBPACK_IMPORTED_MODULE_0__.login,
+      "request": () => _network_request__WEBPACK_IMPORTED_MODULE_1__.request,
+      "scanCode": () => _scan_scan__WEBPACK_IMPORTED_MODULE_2__.scanCode,
+      "setStorage": () => _store_storage__WEBPACK_IMPORTED_MODULE_3__.setStorage
     });
-    var _shared__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require_authing__2(7);
-    const envContext = (0, _shared__WEBPACK_IMPORTED_MODULE_0__.getEnvContext)();
-    function getWxToAliApi() {
-      return {
-        request(options = {}) {
-          const _options = (0, _shared__WEBPACK_IMPORTED_MODULE_0__.adaptOptions)(options, {
-            header: "headers"
-          });
-          (0, _shared__WEBPACK_IMPORTED_MODULE_0__.handleSuccess)(_options, (res) => {
-            return (0, _shared__WEBPACK_IMPORTED_MODULE_0__.adaptOptions)(res, {
-              Headers: "header",
-              status: "statusCode"
-            });
-          });
-          if (envContext.canIUse("request")) {
-            return envContext.request(_options);
-          }
-          return envContext.httpRequest(_options);
-        },
-        setStorageSync(key, data) {
-          envContext.setStorageSync({
-            key,
-            data
-          });
-        },
-        removeStorageSync(key) {
-          envContext.removeStorageSync({ key });
-        },
-        getStorageSync(key) {
-          return envContext.getStorageSync({ key }).data;
-        },
-        scanCode(options = {}) {
-          const _options = (0, _shared__WEBPACK_IMPORTED_MODULE_0__.adaptOptions)(options, {
-            onlyFromCamera: "hideAlbum",
-            scanType: "type"
-          });
-          const typeMap = {
-            barCode: "bar",
-            qrCode: "qr"
-          };
-          if (_options.type) {
-            const _type = typeMap[_options.type];
-            if (_type) {
-              _options.type = _type;
-            } else {
-              (0, _shared__WEBPACK_IMPORTED_MODULE_0__.error)("\u652F\u4ED8\u5B9D\u5C0F\u7A0B\u5E8F\u53EA\u80FD\u626B\u63CF\u3010\u6761\u5F62\u7801\u3011\u548C\u3010\u4E8C\u7EF4\u7801\u3011\uFF0C\u8BF7\u5C06 type \u8BBE\u7F6E\u4E3A barCode \u6216 qrCode !!!");
-              _options.type = "qr";
-            }
-          }
-          (0, _shared__WEBPACK_IMPORTED_MODULE_0__.handleSuccess)(_options, (res) => {
-            return (0, _shared__WEBPACK_IMPORTED_MODULE_0__.adaptOptions)(res, {
-              code: "result"
-            });
-          });
-          envContext.scan(_options);
-        },
-        login(options = {}) {
-          const _options = (0, _shared__WEBPACK_IMPORTED_MODULE_0__.adaptOptions)(options);
-          (0, _shared__WEBPACK_IMPORTED_MODULE_0__.handleSuccess)(_options, (res) => {
-            return (0, _shared__WEBPACK_IMPORTED_MODULE_0__.adaptOptions)(res, {
-              authCode: "code"
-            });
-          });
-          envContext.getAuthCode(_options);
-        }
+    var _login_login__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require_authing__2(9);
+    var _network_request__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require_authing__2(10);
+    var _scan_scan__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require_authing__2(11);
+    var _store_storage__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require_authing__2(12);
+  },
+  (__unused_webpack_module, __webpack_exports_authing__2, __webpack_require_authing__2) => {
+    __webpack_require_authing__2.r(__webpack_exports_authing__2);
+    __webpack_require_authing__2.d(__webpack_exports_authing__2, {
+      "login": () => login
+    });
+    function login(options = {}) {
+      const _options = adaptOptions(options);
+      handleSuccess(_options, (res) => {
+        return adaptOptions(res, {
+          authCode: "code"
+        });
+      });
+      return my.getAuthCode(_options);
+    }
+  },
+  (__unused_webpack_module, __webpack_exports_authing__2, __webpack_require_authing__2) => {
+    __webpack_require_authing__2.r(__webpack_exports_authing__2);
+    __webpack_require_authing__2.d(__webpack_exports_authing__2, {
+      "request": () => request
+    });
+    var _utils__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require_authing__2(7);
+    function request(options = {}) {
+      const _options = (0, _utils__WEBPACK_IMPORTED_MODULE_0__.adaptOptions)(options, {
+        header: "headers"
+      });
+      (0, _utils__WEBPACK_IMPORTED_MODULE_0__.handleSuccess)(_options, (res) => {
+        return (0, _utils__WEBPACK_IMPORTED_MODULE_0__.adaptOptions)(res, {
+          Headers: "header",
+          status: "statusCode"
+        });
+      });
+      if (my.canIUse("request")) {
+        return my.request(_options);
+      }
+      return my.httpRequest(_options);
+    }
+  },
+  (__unused_webpack_module, __webpack_exports_authing__2, __webpack_require_authing__2) => {
+    __webpack_require_authing__2.r(__webpack_exports_authing__2);
+    __webpack_require_authing__2.d(__webpack_exports_authing__2, {
+      "scanCode": () => scanCode
+    });
+    var _utils__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require_authing__2(7);
+    function scanCode(options) {
+      const _options = (0, _utils__WEBPACK_IMPORTED_MODULE_0__.adaptOptions)(options, {
+        onlyFromCamera: "hideAlbum",
+        scanType: "type"
+      });
+      const typeMap = {
+        barCode: "bar",
+        qrCode: "qr"
       };
+      if (_options.type) {
+        const _type = typeMap[_options.type];
+        if (_type) {
+          _options.type = _type;
+        } else {
+          (0, _utils__WEBPACK_IMPORTED_MODULE_0__.error)("\u652F\u4ED8\u5B9D\u5C0F\u7A0B\u5E8F\u53EA\u80FD\u626B\u63CF\u3010\u6761\u5F62\u7801\u3011\u548C\u3010\u4E8C\u7EF4\u7801\u3011\uFF0C\u8BF7\u5C06 type \u8BBE\u7F6E\u4E3A barCode \u6216 qrCode !!!");
+          _options.type = "qr";
+        }
+      }
+      (0, _utils__WEBPACK_IMPORTED_MODULE_0__.handleSuccess)(_options, (res) => {
+        return (0, _utils__WEBPACK_IMPORTED_MODULE_0__.adaptOptions)(res, {
+          code: "result"
+        });
+      });
+      return my.scan(_options);
+    }
+  },
+  (__unused_webpack_module, __webpack_exports_authing__2, __webpack_require_authing__2) => {
+    __webpack_require_authing__2.r(__webpack_exports_authing__2);
+    __webpack_require_authing__2.d(__webpack_exports_authing__2, {
+      "clearStorage": () => clearStorage,
+      "setStorage": () => setStorage
+    });
+    function setStorage(options) {
+      return my.setStorage(options);
+    }
+    function clearStorage() {
+      return my.clearStorage();
+    }
+  },
+  (__unused_webpack_module, __webpack_exports_authing__2, __webpack_require_authing__2) => {
+    __webpack_require_authing__2(1).default;
+    __webpack_require_authing__2.r(__webpack_exports_authing__2);
+    __webpack_require_authing__2.d(__webpack_exports_authing__2, {
+      "callStorage": () => callStorage,
+      "funcA": () => funcA
+    });
+    function funcA() {
+      return "this is function A";
+    }
+    function callStorage() {
+      my.setStorage({
+        key: "callStorage",
+        data: "callStorage"
+      });
     }
   }
 ];
@@ -319,18 +356,6 @@ function __webpack_require_authing__(moduleId) {
   };
 })();
 (() => {
-  __webpack_require_authing__.g = function() {
-    if (typeof globalThis === "object")
-      return globalThis;
-    try {
-      return this || new Function("return this")();
-    } catch (e) {
-      if (typeof window === "object")
-        return window;
-    }
-  }();
-})();
-(() => {
   __webpack_require_authing__.o = (obj, prop) => Object.prototype.hasOwnProperty.call(obj, prop);
 })();
 (() => {
@@ -350,8 +375,14 @@ var __webpack_exports_authing__ = {};
   });
   var _AuthingMove_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require_authing__(1);
   var _AuthingMove_api_proxy__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require_authing__(5);
+  var _a__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require_authing__(13);
   _AuthingMove_core__WEBPACK_IMPORTED_MODULE_0__["default"].use(_AuthingMove_api_proxy__WEBPACK_IMPORTED_MODULE_1__["default"]);
-  common_vendor.index.setStorageSync("aaa", "123");
+  _AuthingMove_core__WEBPACK_IMPORTED_MODULE_0__["default"].funcA = _a__WEBPACK_IMPORTED_MODULE_2__.funcA;
+  my.setStorage({
+    key: "hello11111111",
+    data: "123hello"
+  });
+  (0, _a__WEBPACK_IMPORTED_MODULE_2__.callStorage)();
   const __WEBPACK_DEFAULT_EXPORT__ = _AuthingMove_core__WEBPACK_IMPORTED_MODULE_0__["default"];
 })();
 var __webpack_exports_authing__default = __webpack_exports_authing__["default"];

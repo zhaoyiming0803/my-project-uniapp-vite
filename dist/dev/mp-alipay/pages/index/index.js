@@ -5,6 +5,10 @@ const _sfc_main = /* @__PURE__ */ common_vendor.defineComponent({
   setup(__props) {
     const title = common_vendor.ref("Hello");
     console.log("Authing: ", Object.keys(pages_index_bundle.__webpack_exports_authing__default));
+    my.setStorage({
+      key: "123321",
+      data: "123321"
+    });
     return (_ctx, _cache) => {
       return {
         a: common_vendor.t(title.value)
