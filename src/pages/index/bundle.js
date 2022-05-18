@@ -88,7 +88,7 @@
   /* harmony export */ });
   /* harmony import */ var _transform__WEBPACK_IMPORTED_MODULE_0__ = __authing_webpack_require__(6);
   /* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_1__ = __authing_webpack_require__(7);
-  /* harmony import */ var _promisify__WEBPACK_IMPORTED_MODULE_2__ = __authing_webpack_require__(14);
+  /* harmony import */ var _promisify__WEBPACK_IMPORTED_MODULE_2__ = __authing_webpack_require__(15);
   
   
   
@@ -133,8 +133,8 @@
   /* harmony export */   "default": () => (/* binding */ transformApi)
   /* harmony export */ });
   /* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_0__ = __authing_webpack_require__(7);
-  /* harmony import */ var _apis__WEBPACK_IMPORTED_MODULE_1__ = __authing_webpack_require__(8);
-  /* harmony import */ var _config__WEBPACK_IMPORTED_MODULE_2__ = __authing_webpack_require__(13);
+  /* harmony import */ var _apis__WEBPACK_IMPORTED_MODULE_1__ = __authing_webpack_require__(9);
+  /* harmony import */ var _config__WEBPACK_IMPORTED_MODULE_2__ = __authing_webpack_require__(14);
   
   
   
@@ -201,47 +201,19 @@
   /* 7 */
   /***/ ((__unused_webpack_module, __authing_webpack_exports__, __authing_webpack_require__) => {
   
-  /* AuthongMove cjs variable */ var AuthingMove = __authing_webpack_require__(1).default;
   __authing_webpack_require__.r(__authing_webpack_exports__);
   /* harmony export */ __authing_webpack_require__.d(__authing_webpack_exports__, {
   /* harmony export */   "adaptOptions": () => (/* binding */ adaptOptions),
   /* harmony export */   "error": () => (/* binding */ error),
   /* harmony export */   "generateFromMap": () => (/* binding */ generateFromMap),
-  /* harmony export */   "getEnvContext": () => (/* binding */ getEnvContext),
+  /* harmony export */   "getEnvContext": () => (/* reexport safe */ _runtime_env__WEBPACK_IMPORTED_MODULE_0__.getEnvContext),
   /* harmony export */   "handleSuccess": () => (/* binding */ handleSuccess),
   /* harmony export */   "makeMap": () => (/* binding */ makeMap),
   /* harmony export */   "noop": () => (/* binding */ noop),
   /* harmony export */   "warn": () => (/* binding */ warn)
   /* harmony export */ });
-  function getEnvContext () {
-    const noopEnv = {}
+  /* harmony import */ var _runtime_env__WEBPACK_IMPORTED_MODULE_0__ = __authing_webpack_require__(8);
   
-    switch ("uni") {
-      case 'wx':
-      case 'Mpx':
-        return /* AuthingMove replacement */AuthingMove
-      case 'ali':
-        return my
-      case 'baidu':
-        return swan
-      case 'qq':
-        return qq
-      case 'tt':
-        return tt
-      case 'jd':
-        return jd
-      case 'ks':
-        return ks
-      case 'qa_webview':
-        return qa
-      case 'qa_ux':
-        return noopEnv
-      case 'Taro':
-        return Taro
-      case 'uni':
-        return uni
-    }
-  }
   
   function generateFromMap () {
     const platforms = ['wx', 'ali', 'baidu', 'qq', 'tt', 'jd', 'ks', 'qa_webview', 'qa_ux', 'Mpx', 'taro', 'uni']
@@ -301,16 +273,55 @@
   
   __authing_webpack_require__.r(__authing_webpack_exports__);
   /* harmony export */ __authing_webpack_require__.d(__authing_webpack_exports__, {
+  /* harmony export */   "getEnvContext": () => (/* binding */ getEnvContext)
+  /* harmony export */ });
+  function getEnvContext () {
+    const noopEnv = {}
+  
+    switch ("uni") {
+      case 'wx':
+      case 'Mpx':
+        return wx
+      case 'ali':
+        return my
+      case 'baidu':
+        return swan
+      case 'qq':
+        return qq
+      case 'tt':
+        return tt
+      case 'jd':
+        return jd
+      case 'ks':
+        return ks
+      case 'qa_webview':
+        return qa
+      case 'qa_ux':
+        return noopEnv
+      case 'Taro':
+        return Taro
+      case 'uni':
+        return uni
+    }
+  }
+  
+  
+  /***/ }),
+  /* 9 */
+  /***/ ((__unused_webpack_module, __authing_webpack_exports__, __authing_webpack_require__) => {
+  
+  __authing_webpack_require__.r(__authing_webpack_exports__);
+  /* harmony export */ __authing_webpack_require__.d(__authing_webpack_exports__, {
   /* harmony export */   "getStorage": () => (/* reexport safe */ _storage_storage__WEBPACK_IMPORTED_MODULE_3__.getStorage),
   /* harmony export */   "login": () => (/* reexport safe */ _login_login__WEBPACK_IMPORTED_MODULE_0__.login),
   /* harmony export */   "request": () => (/* reexport safe */ _network_request__WEBPACK_IMPORTED_MODULE_1__.request),
   /* harmony export */   "scanCode": () => (/* reexport safe */ _scan_scan__WEBPACK_IMPORTED_MODULE_2__.scanCode),
   /* harmony export */   "setStorage": () => (/* reexport safe */ _storage_storage__WEBPACK_IMPORTED_MODULE_3__.setStorage)
   /* harmony export */ });
-  /* harmony import */ var _login_login__WEBPACK_IMPORTED_MODULE_0__ = __authing_webpack_require__(9);
-  /* harmony import */ var _network_request__WEBPACK_IMPORTED_MODULE_1__ = __authing_webpack_require__(10);
-  /* harmony import */ var _scan_scan__WEBPACK_IMPORTED_MODULE_2__ = __authing_webpack_require__(11);
-  /* harmony import */ var _storage_storage__WEBPACK_IMPORTED_MODULE_3__ = __authing_webpack_require__(12);
+  /* harmony import */ var _login_login__WEBPACK_IMPORTED_MODULE_0__ = __authing_webpack_require__(10);
+  /* harmony import */ var _network_request__WEBPACK_IMPORTED_MODULE_1__ = __authing_webpack_require__(11);
+  /* harmony import */ var _scan_scan__WEBPACK_IMPORTED_MODULE_2__ = __authing_webpack_require__(12);
+  /* harmony import */ var _storage_storage__WEBPACK_IMPORTED_MODULE_3__ = __authing_webpack_require__(13);
   
   
   
@@ -318,7 +329,7 @@
   
   
   /***/ }),
-  /* 9 */
+  /* 10 */
   /***/ ((__unused_webpack_module, __authing_webpack_exports__, __authing_webpack_require__) => {
   
   __authing_webpack_require__.r(__authing_webpack_exports__);
@@ -336,7 +347,7 @@
   
   
   /***/ }),
-  /* 10 */
+  /* 11 */
   /***/ ((__unused_webpack_module, __authing_webpack_exports__, __authing_webpack_require__) => {
   
   __authing_webpack_require__.r(__authing_webpack_exports__);
@@ -354,7 +365,7 @@
   
   
   /***/ }),
-  /* 11 */
+  /* 12 */
   /***/ ((__unused_webpack_module, __authing_webpack_exports__, __authing_webpack_require__) => {
   
   __authing_webpack_require__.r(__authing_webpack_exports__);
@@ -372,7 +383,7 @@
   
   
   /***/ }),
-  /* 12 */
+  /* 13 */
   /***/ ((__unused_webpack_module, __authing_webpack_exports__, __authing_webpack_require__) => {
   
   __authing_webpack_require__.r(__authing_webpack_exports__);
@@ -397,7 +408,7 @@
   
   
   /***/ }),
-  /* 13 */
+  /* 14 */
   /***/ ((__unused_webpack_module, __authing_webpack_exports__, __authing_webpack_require__) => {
   
   __authing_webpack_require__.r(__authing_webpack_exports__);
@@ -416,7 +427,7 @@
   
   
   /***/ }),
-  /* 14 */
+  /* 15 */
   /***/ ((__unused_webpack_module, __authing_webpack_exports__, __authing_webpack_require__) => {
   
   __authing_webpack_require__.r(__authing_webpack_exports__);

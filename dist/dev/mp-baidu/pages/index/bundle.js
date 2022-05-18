@@ -61,7 +61,7 @@ var __webpack_modules__ = [
     });
     var _transform__WEBPACK_IMPORTED_MODULE_0__ = __authing_webpack_require__2(6);
     var _utils__WEBPACK_IMPORTED_MODULE_1__ = __authing_webpack_require__2(7);
-    var _promisify__WEBPACK_IMPORTED_MODULE_2__ = __authing_webpack_require__2(14);
+    var _promisify__WEBPACK_IMPORTED_MODULE_2__ = __authing_webpack_require__2(15);
     function install(AuthingMove, options = {}) {
       const {
         custom = {}
@@ -93,8 +93,8 @@ var __webpack_modules__ = [
       "default": () => transformApi
     });
     var _utils__WEBPACK_IMPORTED_MODULE_0__ = __authing_webpack_require__2(7);
-    var _apis__WEBPACK_IMPORTED_MODULE_1__ = __authing_webpack_require__2(8);
-    var _config__WEBPACK_IMPORTED_MODULE_2__ = __authing_webpack_require__2(13);
+    var _apis__WEBPACK_IMPORTED_MODULE_1__ = __authing_webpack_require__2(9);
+    var _config__WEBPACK_IMPORTED_MODULE_2__ = __authing_webpack_require__2(14);
     const fromMap = (0, _utils__WEBPACK_IMPORTED_MODULE_0__.generateFromMap)();
     function joinName(from = "", to = "") {
       const _from = `__authing_move_src_mode_${from}__`;
@@ -139,46 +139,18 @@ var __webpack_modules__ = [
     }
   },
   (__unused_webpack_module, __authing_webpack_exports__2, __authing_webpack_require__2) => {
-    var AuthingMove = __authing_webpack_require__2(1).default;
     __authing_webpack_require__2.r(__authing_webpack_exports__2);
     __authing_webpack_require__2.d(__authing_webpack_exports__2, {
       "adaptOptions": () => adaptOptions,
       "error": () => error,
       "generateFromMap": () => generateFromMap,
-      "getEnvContext": () => getEnvContext,
+      "getEnvContext": () => _runtime_env__WEBPACK_IMPORTED_MODULE_0__.getEnvContext,
       "handleSuccess": () => handleSuccess,
       "makeMap": () => makeMap,
       "noop": () => noop,
       "warn": () => warn
     });
-    function getEnvContext() {
-      const noopEnv = {};
-      switch ("uni") {
-        case "wx":
-        case "Mpx":
-          return AuthingMove;
-        case "ali":
-          return my;
-        case "baidu":
-          return swan;
-        case "qq":
-          return qq;
-        case "tt":
-          return tt;
-        case "jd":
-          return jd;
-        case "ks":
-          return ks;
-        case "qa_webview":
-          return qa;
-        case "qa_ux":
-          return noopEnv;
-        case "Taro":
-          return Taro;
-        case "uni":
-          return common_vendor.index;
-      }
-    }
+    var _runtime_env__WEBPACK_IMPORTED_MODULE_0__ = __authing_webpack_require__2(8);
     function generateFromMap() {
       const platforms = ["wx", "ali", "baidu", "qq", "tt", "jd", "ks", "qa_webview", "qa_ux", "Mpx", "taro", "uni"];
       return platforms.reduce((map, platform) => {
@@ -225,16 +197,50 @@ var __webpack_modules__ = [
   (__unused_webpack_module, __authing_webpack_exports__2, __authing_webpack_require__2) => {
     __authing_webpack_require__2.r(__authing_webpack_exports__2);
     __authing_webpack_require__2.d(__authing_webpack_exports__2, {
+      "getEnvContext": () => getEnvContext
+    });
+    function getEnvContext() {
+      const noopEnv = {};
+      switch ("uni") {
+        case "wx":
+        case "Mpx":
+          return wx;
+        case "ali":
+          return my;
+        case "baidu":
+          return swan;
+        case "qq":
+          return qq;
+        case "tt":
+          return tt;
+        case "jd":
+          return jd;
+        case "ks":
+          return ks;
+        case "qa_webview":
+          return qa;
+        case "qa_ux":
+          return noopEnv;
+        case "Taro":
+          return Taro;
+        case "uni":
+          return common_vendor.index;
+      }
+    }
+  },
+  (__unused_webpack_module, __authing_webpack_exports__2, __authing_webpack_require__2) => {
+    __authing_webpack_require__2.r(__authing_webpack_exports__2);
+    __authing_webpack_require__2.d(__authing_webpack_exports__2, {
       "getStorage": () => _storage_storage__WEBPACK_IMPORTED_MODULE_3__.getStorage,
       "login": () => _login_login__WEBPACK_IMPORTED_MODULE_0__.login,
       "request": () => _network_request__WEBPACK_IMPORTED_MODULE_1__.request,
       "scanCode": () => _scan_scan__WEBPACK_IMPORTED_MODULE_2__.scanCode,
       "setStorage": () => _storage_storage__WEBPACK_IMPORTED_MODULE_3__.setStorage
     });
-    var _login_login__WEBPACK_IMPORTED_MODULE_0__ = __authing_webpack_require__2(9);
-    var _network_request__WEBPACK_IMPORTED_MODULE_1__ = __authing_webpack_require__2(10);
-    var _scan_scan__WEBPACK_IMPORTED_MODULE_2__ = __authing_webpack_require__2(11);
-    var _storage_storage__WEBPACK_IMPORTED_MODULE_3__ = __authing_webpack_require__2(12);
+    var _login_login__WEBPACK_IMPORTED_MODULE_0__ = __authing_webpack_require__2(10);
+    var _network_request__WEBPACK_IMPORTED_MODULE_1__ = __authing_webpack_require__2(11);
+    var _scan_scan__WEBPACK_IMPORTED_MODULE_2__ = __authing_webpack_require__2(12);
+    var _storage_storage__WEBPACK_IMPORTED_MODULE_3__ = __authing_webpack_require__2(13);
   },
   (__unused_webpack_module, __authing_webpack_exports__2, __authing_webpack_require__2) => {
     __authing_webpack_require__2.r(__authing_webpack_exports__2);
