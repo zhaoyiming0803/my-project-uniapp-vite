@@ -1,0 +1,19 @@
+{
+  "appid": "touristappid",
+  "compilation-args": {
+    "common": {
+      "babelSetting": {
+        "ignore": []
+      },
+      "enhance": true,
+      "ignorePrefixCss": false
+    },
+    "selected": -3
+  },
+  "host": "baiduboxapp",
+  "projectname": "",
+  "setting": {
+    "autoAudits": false,
+    "urlCheck": false
+  }
+}

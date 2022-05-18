@@ -96,7 +96,7 @@
       custom = {} // custom transform rules
     } = options
     const from = "wx" || 0
-    const to = "ali" || 0
+    const to = "uni" || 0
   
     if (['uni'].includes(to)) {
       return
@@ -186,7 +186,7 @@
           return envContext[api].apply(this, args)
         }
   
-        (0,_utils__WEBPACK_IMPORTED_MODULE_0__.error)(`当前小程序环境不存在 ${api} 方法`)
+        (0,_utils__WEBPACK_IMPORTED_MODULE_0__.error)(`"${api}" method does not exist in the current context`)
       }
     })
   
@@ -213,10 +213,10 @@
   function getEnvContext () {
     const noopEnv = {}
   
-    switch ("ali") {
+    switch ("uni") {
       case 'wx':
       case 'Mpx':
-        return /* AuthingMove replacement */my
+        return /* AuthingMove replacement */uni
       case 'ali':
         return my
       case 'baidu':
@@ -296,7 +296,7 @@
   
   __webpack_require_authing__.r(__webpack_exports_authing__);
   /* harmony export */ __webpack_require_authing__.d(__webpack_exports_authing__, {
-  /* harmony export */   "clearStorage": () => (/* reexport safe */ _store_storage__WEBPACK_IMPORTED_MODULE_3__.clearStorage),
+  /* harmony export */   "getStorage": () => (/* reexport safe */ _store_storage__WEBPACK_IMPORTED_MODULE_3__.getStorage),
   /* harmony export */   "login": () => (/* reexport safe */ _login_login__WEBPACK_IMPORTED_MODULE_0__.login),
   /* harmony export */   "request": () => (/* reexport safe */ _network_request__WEBPACK_IMPORTED_MODULE_1__.request),
   /* harmony export */   "scanCode": () => (/* reexport safe */ _scan_scan__WEBPACK_IMPORTED_MODULE_2__.scanCode),
@@ -316,20 +316,13 @@
   /* 9 */
   /***/ ((__unused_webpack_module, __webpack_exports_authing__, __webpack_require_authing__) => {
   
+  /* AuthongMove cjs variable */ var AuthingMove = __webpack_require_authing__(1).default;
   __webpack_require_authing__.r(__webpack_exports_authing__);
   /* harmony export */ __webpack_require_authing__.d(__webpack_exports_authing__, {
   /* harmony export */   "login": () => (/* binding */ login)
   /* harmony export */ });
   function login (options = {}) {
-    const _options = adaptOptions(options)
-  
-    handleSuccess(_options, res => {
-      return adaptOptions(res, {
-        authCode: 'code'
-      })
-    })
-  
-    return my.getAuthCode(_options)
+    return /* AuthingMove replacement */uni.login(options)
   }
   
   
@@ -337,73 +330,27 @@
   /* 10 */
   /***/ ((__unused_webpack_module, __webpack_exports_authing__, __webpack_require_authing__) => {
   
+  /* AuthongMove cjs variable */ var AuthingMove = __webpack_require_authing__(1).default;
   __webpack_require_authing__.r(__webpack_exports_authing__);
   /* harmony export */ __webpack_require_authing__.d(__webpack_exports_authing__, {
   /* harmony export */   "request": () => (/* binding */ request)
   /* harmony export */ });
-  /* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require_authing__(7);
-  
-  
   function request (options = {}) {
-    const _options = (0,_utils__WEBPACK_IMPORTED_MODULE_0__.adaptOptions)(options, {
-      header: 'headers'
-    })
-  
-    ;(0,_utils__WEBPACK_IMPORTED_MODULE_0__.handleSuccess)(_options, res => {
-      return (0,_utils__WEBPACK_IMPORTED_MODULE_0__.adaptOptions)(res, {
-        Headers: 'header',
-        status: 'statusCode'
-      })
-    })
-  
-    // version > 1.11.0
-    if (my.canIUse('request')) {
-      return my.request(_options)
-    }
-  
-    // will be archived, support dingding miniprogram
-    return my.httpRequest(_options)
+    return /* AuthingMove replacement */uni.request(options)
   }
+  
   
   /***/ }),
   /* 11 */
   /***/ ((__unused_webpack_module, __webpack_exports_authing__, __webpack_require_authing__) => {
   
+  /* AuthongMove cjs variable */ var AuthingMove = __webpack_require_authing__(1).default;
   __webpack_require_authing__.r(__webpack_exports_authing__);
   /* harmony export */ __webpack_require_authing__.d(__webpack_exports_authing__, {
   /* harmony export */   "scanCode": () => (/* binding */ scanCode)
   /* harmony export */ });
-  /* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require_authing__(7);
-  
-  
   function scanCode (options) {
-    const _options = (0,_utils__WEBPACK_IMPORTED_MODULE_0__.adaptOptions)(options, {
-      onlyFromCamera: 'hideAlbum',
-      scanType: 'type'
-    })
-  
-    const typeMap = {
-      barCode: 'bar',
-      qrCode: 'qr'
-    }
-  
-    if (_options.type) {
-      const _type = typeMap[_options.type]
-      if (_type) {
-        _options.type = _type
-      } else {
-        (0,_utils__WEBPACK_IMPORTED_MODULE_0__.error)('支付宝小程序只能扫描【条形码】和【二维码】，请将 type 设置为 barCode 或 qrCode !!!')
-        _options.type = 'qr'
-      }
-    }
-  
-    (0,_utils__WEBPACK_IMPORTED_MODULE_0__.handleSuccess)(_options, res => {
-      return (0,_utils__WEBPACK_IMPORTED_MODULE_0__.adaptOptions)(res, {
-        code: 'result'
-      })
-    })
-  
-    return my.scan(_options)
+    return /* AuthingMove replacement */uni.scanCode(options)
   }
   
   
@@ -411,17 +358,20 @@
   /* 12 */
   /***/ ((__unused_webpack_module, __webpack_exports_authing__, __webpack_require_authing__) => {
   
+  /* AuthongMove cjs variable */ var AuthingMove = __webpack_require_authing__(1).default;
   __webpack_require_authing__.r(__webpack_exports_authing__);
   /* harmony export */ __webpack_require_authing__.d(__webpack_exports_authing__, {
-  /* harmony export */   "clearStorage": () => (/* binding */ clearStorage),
+  /* harmony export */   "getStorage": () => (/* binding */ getStorage),
   /* harmony export */   "setStorage": () => (/* binding */ setStorage)
   /* harmony export */ });
   function setStorage (options) {
-    return my.setStorage(options)
+    options.encrypt = false
+    return /* AuthingMove replacement */uni.setStorage(options)
   }
   
-  function clearStorage () {
-    return my.clearStorage()
+  function getStorage (options) {
+    options.encrypt = false
+    return /* AuthingMove replacement */uni.getStorage(options)
   }
   
   
@@ -440,7 +390,7 @@
   }
   
   function callStorage () {
-    /* AuthingMove replacement */my.setStorage({
+    /* AuthingMove replacement */uni.setStorage({
       key: 'callStorage',
       data: 'callStorage'
     })
@@ -523,10 +473,15 @@
   
   _AuthingMove_core__WEBPACK_IMPORTED_MODULE_0__["default"].funcA = _a__WEBPACK_IMPORTED_MODULE_2__.funcA
   
-  /* AuthingMove replacement */my.setStorage({
+  /* AuthingMove replacement */uni.setStorage({
     key: 'hello11111111',
     data: '123hello'
   })
+  
+  // AuthingMove.setStorage({
+  //   key: 'thisiskey',
+  //   data: 'thisisdata'
+  // })
   
   ;(0,_a__WEBPACK_IMPORTED_MODULE_2__.callStorage)()
   
