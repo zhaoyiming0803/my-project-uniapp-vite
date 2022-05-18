@@ -1,14 +1,14 @@
 /******/ var __webpack_modules__ = ([
 /* 0 */,
 /* 1 */
-/***/ ((__unused_webpack_module, __webpack_exports_authing__, __webpack_require_authing__) => {
+/***/ ((__unused_webpack_module, __authing_webpack_exports__, __authing_webpack_require__) => {
 
-  __webpack_require_authing__.r(__webpack_exports_authing__);
-  /* harmony export */ __webpack_require_authing__.d(__webpack_exports_authing__, {
+  __authing_webpack_require__.r(__authing_webpack_exports__);
+  /* harmony export */ __authing_webpack_require__.d(__authing_webpack_exports__, {
   /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
   /* harmony export */ });
-  /* harmony import */ var _instance__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require_authing__(2);
-  /* harmony import */ var _global_api__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require_authing__(3);
+  /* harmony import */ var _instance__WEBPACK_IMPORTED_MODULE_0__ = __authing_webpack_require__(2);
+  /* harmony import */ var _global_api__WEBPACK_IMPORTED_MODULE_1__ = __authing_webpack_require__(3);
   
   
   
@@ -21,23 +21,23 @@
   
   /***/ }),
   /* 2 */
-  /***/ ((__unused_webpack_module, __webpack_exports_authing__, __webpack_require_authing__) => {
+  /***/ ((__unused_webpack_module, __authing_webpack_exports__, __authing_webpack_require__) => {
   
-  __webpack_require_authing__.r(__webpack_exports_authing__);
-  /* harmony export */ __webpack_require_authing__.d(__webpack_exports_authing__, {
+  __authing_webpack_require__.r(__authing_webpack_exports__);
+  /* harmony export */ __authing_webpack_require__.d(__authing_webpack_exports__, {
   /* harmony export */   "default": () => (/* binding */ AuthingMove)
   /* harmony export */ });
   function AuthingMove () {}
   
   /***/ }),
   /* 3 */
-  /***/ ((__unused_webpack_module, __webpack_exports_authing__, __webpack_require_authing__) => {
+  /***/ ((__unused_webpack_module, __authing_webpack_exports__, __authing_webpack_require__) => {
   
-  __webpack_require_authing__.r(__webpack_exports_authing__);
-  /* harmony export */ __webpack_require_authing__.d(__webpack_exports_authing__, {
+  __authing_webpack_require__.r(__authing_webpack_exports__);
+  /* harmony export */ __authing_webpack_require__.d(__authing_webpack_exports__, {
   /* harmony export */   "initGlobalApi": () => (/* binding */ initGlobalApi)
   /* harmony export */ });
-  /* harmony import */ var _use__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require_authing__(4);
+  /* harmony import */ var _use__WEBPACK_IMPORTED_MODULE_0__ = __authing_webpack_require__(4);
   
   
   function initGlobalApi (AuthingMove) {
@@ -47,10 +47,10 @@
   
   /***/ }),
   /* 4 */
-  /***/ ((__unused_webpack_module, __webpack_exports_authing__, __webpack_require_authing__) => {
+  /***/ ((__unused_webpack_module, __authing_webpack_exports__, __authing_webpack_require__) => {
   
-  __webpack_require_authing__.r(__webpack_exports_authing__);
-  /* harmony export */ __webpack_require_authing__.d(__webpack_exports_authing__, {
+  __authing_webpack_require__.r(__authing_webpack_exports__);
+  /* harmony export */ __authing_webpack_require__.d(__authing_webpack_exports__, {
   /* harmony export */   "initUse": () => (/* binding */ initUse)
   /* harmony export */ });
   function initUse (AuthingMove) {
@@ -80,14 +80,14 @@
   
   /***/ }),
   /* 5 */
-  /***/ ((__unused_webpack_module, __webpack_exports_authing__, __webpack_require_authing__) => {
+  /***/ ((__unused_webpack_module, __authing_webpack_exports__, __authing_webpack_require__) => {
   
-  __webpack_require_authing__.r(__webpack_exports_authing__);
-  /* harmony export */ __webpack_require_authing__.d(__webpack_exports_authing__, {
+  __authing_webpack_require__.r(__authing_webpack_exports__);
+  /* harmony export */ __authing_webpack_require__.d(__authing_webpack_exports__, {
   /* harmony export */   "default": () => (/* binding */ install)
   /* harmony export */ });
-  /* harmony import */ var _transform__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require_authing__(6);
-  /* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require_authing__(7);
+  /* harmony import */ var _transform__WEBPACK_IMPORTED_MODULE_0__ = __authing_webpack_require__(6);
+  /* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_1__ = __authing_webpack_require__(7);
   
   
   
@@ -98,24 +98,20 @@
     const from = "wx" || 0
     const to = "uni" || 0
   
-    if (['uni'].includes(to)) {
-      return
-    }
-  
-    const transformedApi = (0,_transform__WEBPACK_IMPORTED_MODULE_0__["default"])({
+    const transformedApis = (0,_transform__WEBPACK_IMPORTED_MODULE_0__["default"])({
       from,
       to,
       custom
     })
   
-    Object.keys(transformedApi).forEach(api => {
+    Object.keys(transformedApis).forEach(api => {
       try {
-        if (typeof transformedApi[api] !== 'function') {
-          AuthingMove[api] = transformedApi[api]
+        if (typeof transformedApis[api] !== 'function') {
+          AuthingMove[api] = transformedApis[api]
           return
         }
   
-        AuthingMove[api] = (...args) => transformedApi[api].apply(AuthingMove, args)
+        AuthingMove[api] = (...args) => transformedApis[api].apply(AuthingMove, args)
       } catch (e) {
         (0,_utils__WEBPACK_IMPORTED_MODULE_1__.error)(`Call ${AuthingMove}.${api} error:` + JSON.stringify(e))
       }
@@ -125,14 +121,16 @@
   
   /***/ }),
   /* 6 */
-  /***/ ((__unused_webpack_module, __webpack_exports_authing__, __webpack_require_authing__) => {
+  /***/ ((__unused_webpack_module, __authing_webpack_exports__, __authing_webpack_require__) => {
   
-  __webpack_require_authing__.r(__webpack_exports_authing__);
-  /* harmony export */ __webpack_require_authing__.d(__webpack_exports_authing__, {
+  __authing_webpack_require__.r(__authing_webpack_exports__);
+  /* harmony export */ __authing_webpack_require__.d(__authing_webpack_exports__, {
   /* harmony export */   "default": () => (/* binding */ transformApi)
   /* harmony export */ });
-  /* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require_authing__(7);
-  /* harmony import */ var _apis__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require_authing__(8);
+  /* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_0__ = __authing_webpack_require__(7);
+  /* harmony import */ var _apis__WEBPACK_IMPORTED_MODULE_1__ = __authing_webpack_require__(8);
+  /* harmony import */ var _config__WEBPACK_IMPORTED_MODULE_2__ = __authing_webpack_require__(13);
+  
   
   
   
@@ -147,7 +145,7 @@
     const envContext = (0,_utils__WEBPACK_IMPORTED_MODULE_0__.getEnvContext)()
     const needProxy = Object.create(null)
   
-    Object.keys(envContext).concat(Object.keys(_apis__WEBPACK_IMPORTED_MODULE_1__)).forEach(key => {
+    _config__WEBPACK_IMPORTED_MODULE_2__.supportedApis.concat(Object.keys(_apis__WEBPACK_IMPORTED_MODULE_1__)).forEach(key => {
       needProxy[key] = envContext[key] || _apis__WEBPACK_IMPORTED_MODULE_1__[key]
     })
   
@@ -196,11 +194,11 @@
   
   /***/ }),
   /* 7 */
-  /***/ ((__unused_webpack_module, __webpack_exports_authing__, __webpack_require_authing__) => {
+  /***/ ((__unused_webpack_module, __authing_webpack_exports__, __authing_webpack_require__) => {
   
-  /* AuthongMove cjs variable */ var AuthingMove = __webpack_require_authing__(1).default;
-  __webpack_require_authing__.r(__webpack_exports_authing__);
-  /* harmony export */ __webpack_require_authing__.d(__webpack_exports_authing__, {
+  /* AuthongMove cjs variable */ var AuthingMove = __authing_webpack_require__(1).default;
+  __authing_webpack_require__.r(__authing_webpack_exports__);
+  /* harmony export */ __authing_webpack_require__.d(__authing_webpack_exports__, {
   /* harmony export */   "adaptOptions": () => (/* binding */ adaptOptions),
   /* harmony export */   "error": () => (/* binding */ error),
   /* harmony export */   "generateFromMap": () => (/* binding */ generateFromMap),
@@ -208,6 +206,7 @@
   /* harmony export */   "handleSuccess": () => (/* binding */ handleSuccess),
   /* harmony export */   "makeMap": () => (/* binding */ makeMap),
   /* harmony export */   "noop": () => (/* binding */ noop),
+  /* harmony export */   "promisify": () => (/* binding */ promisify),
   /* harmony export */   "warn": () => (/* binding */ warn)
   /* harmony export */ });
   function getEnvContext () {
@@ -216,7 +215,7 @@
     switch ("uni") {
       case 'wx':
       case 'Mpx':
-        return /* AuthingMove replacement */uni
+        return /* AuthingMove replacement */AuthingMove
       case 'ali':
         return my
       case 'baidu':
@@ -227,11 +226,13 @@
         return tt
       case 'jd':
         return jd
+      case 'ks':
+        return ks
       case 'qa_webview':
         return qa
       case 'qa_ux':
         return noopEnv
-      case 'Taro':
+      case 'taro':
         return Taro
       case 'uni':
         return uni
@@ -239,7 +240,7 @@
   }
   
   function generateFromMap () {
-    const platforms = ['wx', 'ali', 'baidu', 'qq', 'tt', 'jd', 'qa_webview', 'qa_ux']
+    const platforms = ['wx', 'ali', 'baidu', 'qq', 'tt', 'jd', 'ks', 'qa_webview', 'qa_ux', 'Mpx', 'taro', 'uni']
     return platforms.reduce((map, platform) => {
       map[`__authing_move_src_mode_${platform}__`] = platform
       return map
@@ -254,11 +255,11 @@
   }
   
   function warn (message) {
-    console.warn && console.warn(`[AuthingMove/api-proxy warn]:\n ${message}`)
+    console.warn && console.warn(`[AuthingMove/api-proxy warn in "${"uni"}"]:\n ${message}`)
   }
   
   function error (message) {
-    console.error && console.error(`[AuthingMove/api-proxy error]:\n ${message}`)
+    console.error && console.error(`[AuthingMove/api-proxy error in "${"uni"}"]:\n ${message}`)
   }
   
   function noop () {}
@@ -289,23 +290,41 @@
     originalOptions.success = res => cachedSuccess.call(_this, wrappedSuccess(res) || res)
   }
   
+  function promisify (api, options) {
+    return new Promise((resolve, reject) => {
+      const originalSuccess = options.success
+      const originalFail = options.fail
+  
+      options.success = function success (res) {
+        originalSuccess && originalSuccess.call(this, res)
+        resolve(res)
+      }
+  
+      options.fail = function fail (res) {
+        originalFail && originalFail.call(this, res)
+        reject(res)
+      }
+  
+      api(options)
+    })
+  }
   
   /***/ }),
   /* 8 */
-  /***/ ((__unused_webpack_module, __webpack_exports_authing__, __webpack_require_authing__) => {
+  /***/ ((__unused_webpack_module, __authing_webpack_exports__, __authing_webpack_require__) => {
   
-  __webpack_require_authing__.r(__webpack_exports_authing__);
-  /* harmony export */ __webpack_require_authing__.d(__webpack_exports_authing__, {
-  /* harmony export */   "getStorage": () => (/* reexport safe */ _store_storage__WEBPACK_IMPORTED_MODULE_3__.getStorage),
+  __authing_webpack_require__.r(__authing_webpack_exports__);
+  /* harmony export */ __authing_webpack_require__.d(__authing_webpack_exports__, {
+  /* harmony export */   "getStorage": () => (/* reexport safe */ _storage_storage__WEBPACK_IMPORTED_MODULE_3__.getStorage),
   /* harmony export */   "login": () => (/* reexport safe */ _login_login__WEBPACK_IMPORTED_MODULE_0__.login),
   /* harmony export */   "request": () => (/* reexport safe */ _network_request__WEBPACK_IMPORTED_MODULE_1__.request),
   /* harmony export */   "scanCode": () => (/* reexport safe */ _scan_scan__WEBPACK_IMPORTED_MODULE_2__.scanCode),
-  /* harmony export */   "setStorage": () => (/* reexport safe */ _store_storage__WEBPACK_IMPORTED_MODULE_3__.setStorage)
+  /* harmony export */   "setStorage": () => (/* reexport safe */ _storage_storage__WEBPACK_IMPORTED_MODULE_3__.setStorage)
   /* harmony export */ });
-  /* harmony import */ var _login_login__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require_authing__(9);
-  /* harmony import */ var _network_request__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require_authing__(10);
-  /* harmony import */ var _scan_scan__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require_authing__(11);
-  /* harmony import */ var _store_storage__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require_authing__(12);
+  /* harmony import */ var _login_login__WEBPACK_IMPORTED_MODULE_0__ = __authing_webpack_require__(9);
+  /* harmony import */ var _network_request__WEBPACK_IMPORTED_MODULE_1__ = __authing_webpack_require__(10);
+  /* harmony import */ var _scan_scan__WEBPACK_IMPORTED_MODULE_2__ = __authing_webpack_require__(11);
+  /* harmony import */ var _storage_storage__WEBPACK_IMPORTED_MODULE_3__ = __authing_webpack_require__(12);
   
   
   
@@ -314,87 +333,101 @@
   
   /***/ }),
   /* 9 */
-  /***/ ((__unused_webpack_module, __webpack_exports_authing__, __webpack_require_authing__) => {
+  /***/ ((__unused_webpack_module, __authing_webpack_exports__, __authing_webpack_require__) => {
   
-  /* AuthongMove cjs variable */ var AuthingMove = __webpack_require_authing__(1).default;
-  __webpack_require_authing__.r(__webpack_exports_authing__);
-  /* harmony export */ __webpack_require_authing__.d(__webpack_exports_authing__, {
+  __authing_webpack_require__.r(__authing_webpack_exports__);
+  /* harmony export */ __authing_webpack_require__.d(__authing_webpack_exports__, {
   /* harmony export */   "login": () => (/* binding */ login)
   /* harmony export */ });
+  /* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_0__ = __authing_webpack_require__(7);
+  
+  
+  const envContext = (0,_utils__WEBPACK_IMPORTED_MODULE_0__.getEnvContext)()
+  
   function login (options = {}) {
-    return /* AuthingMove replacement */uni.login(options)
+    return envContext.login(options)
   }
   
   
   /***/ }),
   /* 10 */
-  /***/ ((__unused_webpack_module, __webpack_exports_authing__, __webpack_require_authing__) => {
+  /***/ ((__unused_webpack_module, __authing_webpack_exports__, __authing_webpack_require__) => {
   
-  /* AuthongMove cjs variable */ var AuthingMove = __webpack_require_authing__(1).default;
-  __webpack_require_authing__.r(__webpack_exports_authing__);
-  /* harmony export */ __webpack_require_authing__.d(__webpack_exports_authing__, {
+  __authing_webpack_require__.r(__authing_webpack_exports__);
+  /* harmony export */ __authing_webpack_require__.d(__authing_webpack_exports__, {
   /* harmony export */   "request": () => (/* binding */ request)
   /* harmony export */ });
+  /* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_0__ = __authing_webpack_require__(7);
+  
+  
+  const envContext = (0,_utils__WEBPACK_IMPORTED_MODULE_0__.getEnvContext)()
+  
   function request (options = {}) {
-    return /* AuthingMove replacement */uni.request(options)
+    return envContext.request(options)
   }
   
   
   /***/ }),
   /* 11 */
-  /***/ ((__unused_webpack_module, __webpack_exports_authing__, __webpack_require_authing__) => {
+  /***/ ((__unused_webpack_module, __authing_webpack_exports__, __authing_webpack_require__) => {
   
-  /* AuthongMove cjs variable */ var AuthingMove = __webpack_require_authing__(1).default;
-  __webpack_require_authing__.r(__webpack_exports_authing__);
-  /* harmony export */ __webpack_require_authing__.d(__webpack_exports_authing__, {
+  __authing_webpack_require__.r(__authing_webpack_exports__);
+  /* harmony export */ __authing_webpack_require__.d(__authing_webpack_exports__, {
   /* harmony export */   "scanCode": () => (/* binding */ scanCode)
   /* harmony export */ });
-  function scanCode (options) {
-    return /* AuthingMove replacement */uni.scanCode(options)
+  /* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_0__ = __authing_webpack_require__(7);
+  
+  
+  const envContext = (0,_utils__WEBPACK_IMPORTED_MODULE_0__.getEnvContext)()
+  
+  function scanCode (options = {}) {
+    return envContext.scanCode(options)
   }
   
   
   /***/ }),
   /* 12 */
-  /***/ ((__unused_webpack_module, __webpack_exports_authing__, __webpack_require_authing__) => {
+  /***/ ((__unused_webpack_module, __authing_webpack_exports__, __authing_webpack_require__) => {
   
-  /* AuthongMove cjs variable */ var AuthingMove = __webpack_require_authing__(1).default;
-  __webpack_require_authing__.r(__webpack_exports_authing__);
-  /* harmony export */ __webpack_require_authing__.d(__webpack_exports_authing__, {
+  __authing_webpack_require__.r(__authing_webpack_exports__);
+  /* harmony export */ __authing_webpack_require__.d(__authing_webpack_exports__, {
   /* harmony export */   "getStorage": () => (/* binding */ getStorage),
   /* harmony export */   "setStorage": () => (/* binding */ setStorage)
   /* harmony export */ });
-  function setStorage (options) {
+  /* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_0__ = __authing_webpack_require__(7);
+  
+  
+  const envContext = (0,_utils__WEBPACK_IMPORTED_MODULE_0__.getEnvContext)()
+  
+  function setStorage (options = {}) {
     options.encrypt = false
-    return /* AuthingMove replacement */uni.setStorage(options)
+    return envContext.setStorage(options)
   }
   
-  function getStorage (options) {
+  function getStorage (options = {}) {
     options.encrypt = false
-    return /* AuthingMove replacement */uni.getStorage(options)
+    return envContext.getStorage(options)
   }
   
   
   /***/ }),
   /* 13 */
-  /***/ ((__unused_webpack_module, __webpack_exports_authing__, __webpack_require_authing__) => {
+  /***/ ((__unused_webpack_module, __authing_webpack_exports__, __authing_webpack_require__) => {
   
-  /* AuthongMove cjs variable */ var AuthingMove = __webpack_require_authing__(1).default;
-  __webpack_require_authing__.r(__webpack_exports_authing__);
-  /* harmony export */ __webpack_require_authing__.d(__webpack_exports_authing__, {
-  /* harmony export */   "callStorage": () => (/* binding */ callStorage),
-  /* harmony export */   "funcA": () => (/* binding */ funcA)
+  __authing_webpack_require__.r(__authing_webpack_exports__);
+  /* harmony export */ __authing_webpack_require__.d(__authing_webpack_exports__, {
+  /* harmony export */   "supportedApis": () => (/* binding */ supportedApis)
   /* harmony export */ });
-  function funcA () {
-    return 'this is function A'
-  }
+  // base wx
+  const supportedApis = [
+    'login',
+    'request',
+    'scanCode',
+    'login',
+    'setStorage',
+    'getStorage'
+  ]
   
-  function callStorage () {
-    /* AuthingMove replacement */uni.setStorage({
-      key: 'callStorage',
-      data: 'callStorage'
-    })
-  }
   
   /***/ })
   /******/ ]);
@@ -403,7 +436,7 @@
   /******/ var __webpack_module_cache__ = {};
   /******/ 
   /******/ // The require function
-  /******/ function __webpack_require_authing__(moduleId) {
+  /******/ function __authing_webpack_require__(moduleId) {
   /******/ 	// Check if module is in cache
   /******/ 	var cachedModule = __webpack_module_cache__[moduleId];
   /******/ 	if (cachedModule !== undefined) {
@@ -417,7 +450,7 @@
   /******/ 	};
   /******/ 
   /******/ 	// Execute the module function
-  /******/ 	__webpack_modules__[moduleId](module, module.exports, __webpack_require_authing__);
+  /******/ 	__webpack_modules__[moduleId](module, module.exports, __authing_webpack_require__);
   /******/ 
   /******/ 	// Return the exports of the module
   /******/ 	return module.exports;
@@ -427,9 +460,9 @@
   /******/ /* webpack/runtime/define property getters */
   /******/ (() => {
   /******/ 	// define getter functions for harmony exports
-  /******/ 	__webpack_require_authing__.d = (exports, definition) => {
+  /******/ 	__authing_webpack_require__.d = (exports, definition) => {
   /******/ 		for(var key in definition) {
-  /******/ 			if(__webpack_require_authing__.o(definition, key) && !__webpack_require_authing__.o(exports, key)) {
+  /******/ 			if(__authing_webpack_require__.o(definition, key) && !__authing_webpack_require__.o(exports, key)) {
   /******/ 				Object.defineProperty(exports, key, { enumerable: true, get: definition[key] });
   /******/ 			}
   /******/ 		}
@@ -438,13 +471,13 @@
   /******/ 
   /******/ /* webpack/runtime/hasOwnProperty shorthand */
   /******/ (() => {
-  /******/ 	__webpack_require_authing__.o = (obj, prop) => (Object.prototype.hasOwnProperty.call(obj, prop))
+  /******/ 	__authing_webpack_require__.o = (obj, prop) => (Object.prototype.hasOwnProperty.call(obj, prop))
   /******/ })();
   /******/ 
   /******/ /* webpack/runtime/make namespace object */
   /******/ (() => {
   /******/ 	// define __esModule on exports
-  /******/ 	__webpack_require_authing__.r = (exports) => {
+  /******/ 	__authing_webpack_require__.r = (exports) => {
   /******/ 		if(typeof Symbol !== 'undefined' && Symbol.toStringTag) {
   /******/ 			Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
   /******/ 		}
@@ -453,42 +486,59 @@
   /******/ })();
   /******/ 
   /************************************************************************/
-  var __webpack_exports_authing__ = {};
+  var __authing_webpack_exports__ = {};
   // This entry need to be wrapped in an IIFE because it need to be isolated against other modules in the chunk.
   (() => {
-  /* AuthongMove cjs variable */ var AuthingMove = __webpack_require_authing__(1).default;
-  __webpack_require_authing__.r(__webpack_exports_authing__);
-  /* harmony export */ __webpack_require_authing__.d(__webpack_exports_authing__, {
+  /* AuthongMove cjs variable */ var AuthingMove = __authing_webpack_require__(1).default;
+  __authing_webpack_require__.r(__authing_webpack_exports__);
+  /* harmony export */ __authing_webpack_require__.d(__authing_webpack_exports__, {
   /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
   /* harmony export */ });
-  /* harmony import */ var _AuthingMove_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require_authing__(1);
-  /* harmony import */ var _AuthingMove_api_proxy__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require_authing__(5);
-  /* harmony import */ var _a__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require_authing__(13);
-  
-  
+  /* harmony import */ var _AuthingMove_core__WEBPACK_IMPORTED_MODULE_0__ = __authing_webpack_require__(1);
+  /* harmony import */ var _AuthingMove_api_proxy__WEBPACK_IMPORTED_MODULE_1__ = __authing_webpack_require__(5);
   
   
   
   _AuthingMove_core__WEBPACK_IMPORTED_MODULE_0__["default"].use(_AuthingMove_api_proxy__WEBPACK_IMPORTED_MODULE_1__["default"])
   
-  _AuthingMove_core__WEBPACK_IMPORTED_MODULE_0__["default"].funcA = _a__WEBPACK_IMPORTED_MODULE_2__.funcA
-  
-  /* AuthingMove replacement */uni.setStorage({
-    key: 'hello11111111',
-    data: '123hello'
+  /* AuthingMove replacement */AuthingMove.setStorage({
+    key: 'setStorageKey',
+    data: {
+      a: 1,
+      b: 2
+    },
+    success: res => {
+      console.log('wx.setStorage success: ', res)
+    }
   })
   
-  // AuthingMove.setStorage({
-  //   key: 'thisiskey',
-  //   data: 'thisisdata'
+  // wx.scanCode({
+  //   success: res => {
+  //     console.log('wx.scanCode: ', res)
+  //   }
   // })
   
-  ;(0,_a__WEBPACK_IMPORTED_MODULE_2__.callStorage)()
+  /* AuthingMove replacement */AuthingMove.request({
+    url: 'https://api.github.com/users/zhaoyiming0803',
+    responseType: 'text',
+    success: res => {
+      console.log('wx.request success: ', res)
+    },
+    fail: res => {
+      console.log('wx.request fail: ', res)
+    }
+  })
+  
+  /* AuthingMove replacement */AuthingMove.login({
+    success: res => {
+      console.log('-------: ', res)
+    }
+  })
   
   /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_AuthingMove_core__WEBPACK_IMPORTED_MODULE_0__["default"]);
   
   })();
   
-  var __webpack_exports_authing__default = __webpack_exports_authing__["default"];
-  export { __webpack_exports_authing__default as default };
+  var __authing_webpack_exports__default = __authing_webpack_exports__["default"];
+  export { __authing_webpack_exports__default as default };
   

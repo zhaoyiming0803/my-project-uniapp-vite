@@ -4,7 +4,14 @@ var pages_index_bundle = require("./bundle.js");
 const _sfc_main = /* @__PURE__ */ common_vendor.defineComponent({
   setup(__props) {
     const title = common_vendor.ref("Hello");
-    console.log("Authing: ", Object.keys(pages_index_bundle.__webpack_exports_authing__default));
+    console.log("Authing: ", Object.keys(pages_index_bundle.__authing_webpack_exports__default));
+    common_vendor.index.setStorage({
+      key: "12321",
+      data: "12321",
+      success: (res) => {
+        console.log("success");
+      }
+    });
     return (_ctx, _cache) => {
       return {
         a: common_vendor.t(title.value)

@@ -15,6 +15,14 @@ const title = ref('Hello')
 
 console.log('Authing: ', Object.keys(AuthingMove))
 
+uni.setStorage({
+  key: '12321',
+  data: '12321',
+  success: res => {
+    console.log('success')
+  }
+})
+
 </script>
 
 <style>
