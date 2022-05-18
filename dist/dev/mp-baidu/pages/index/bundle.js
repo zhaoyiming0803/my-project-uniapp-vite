@@ -61,6 +61,7 @@ var __webpack_modules__ = [
     });
     var _transform__WEBPACK_IMPORTED_MODULE_0__ = __authing_webpack_require__2(6);
     var _utils__WEBPACK_IMPORTED_MODULE_1__ = __authing_webpack_require__2(7);
+    var _promisify__WEBPACK_IMPORTED_MODULE_2__ = __authing_webpack_require__2(14);
     function install(AuthingMove, options = {}) {
       const {
         custom = {}
@@ -72,13 +73,14 @@ var __webpack_modules__ = [
         to,
         custom
       });
-      Object.keys(transformedApis).forEach((api) => {
+      const apis = Object.assign({}, transformedApis, (0, _promisify__WEBPACK_IMPORTED_MODULE_2__.promisify)(transformedApis));
+      Object.keys(apis).forEach((api) => {
         try {
-          if (typeof transformedApis[api] !== "function") {
-            AuthingMove[api] = transformedApis[api];
+          if (typeof apis[api] !== "function") {
+            AuthingMove[api] = apis[api];
             return;
           }
-          AuthingMove[api] = (...args) => transformedApis[api].apply(AuthingMove, args);
+          AuthingMove[api] = (...args) => apis[api].apply(AuthingMove, args);
         } catch (e) {
           (0, _utils__WEBPACK_IMPORTED_MODULE_1__.error)(`Call ${AuthingMove}.${api} error:` + JSON.stringify(e));
         }
@@ -147,7 +149,6 @@ var __webpack_modules__ = [
       "handleSuccess": () => handleSuccess,
       "makeMap": () => makeMap,
       "noop": () => noop,
-      "promisify": () => promisify,
       "warn": () => warn
     });
     function getEnvContext() {
@@ -172,7 +173,7 @@ var __webpack_modules__ = [
           return qa;
         case "qa_ux":
           return noopEnv;
-        case "taro":
+        case "Taro":
           return Taro;
         case "uni":
           return common_vendor.index;
@@ -219,21 +220,6 @@ var __webpack_modules__ = [
       const _this = context || this;
       const cachedSuccess = originalOptions.success;
       originalOptions.success = (res) => cachedSuccess.call(_this, wrappedSuccess(res) || res);
-    }
-    function promisify(api, options) {
-      return new Promise((resolve, reject) => {
-        const originalSuccess = options.success;
-        const originalFail = options.fail;
-        options.success = function success(res) {
-          originalSuccess && originalSuccess.call(this, res);
-          resolve(res);
-        };
-        options.fail = function fail(res) {
-          originalFail && originalFail.call(this, res);
-          reject(res);
-        };
-        api(options);
-      });
     }
   },
   (__unused_webpack_module, __authing_webpack_exports__2, __authing_webpack_require__2) => {
@@ -313,6 +299,54 @@ var __webpack_modules__ = [
       "setStorage",
       "getStorage"
     ];
+  },
+  (__unused_webpack_module, __authing_webpack_exports__2, __authing_webpack_require__2) => {
+    __authing_webpack_require__2.r(__authing_webpack_exports__2);
+    __authing_webpack_require__2.d(__authing_webpack_exports__2, {
+      "promisify": () => promisify
+    });
+    var _utils__WEBPACK_IMPORTED_MODULE_0__ = __authing_webpack_require__2(7);
+    const envContext = (0, _utils__WEBPACK_IMPORTED_MODULE_0__.getEnvContext)();
+    function promisify(apis) {
+      const fromMap = (0, _utils__WEBPACK_IMPORTED_MODULE_0__.generateFromMap)();
+      return Object.keys(apis).reduce((map, key) => {
+        if (typeof apis[key] !== "function") {
+          return map;
+        }
+        map[key] = function(...args) {
+          if (promisifyFilter(key)) {
+            return apis[key].apply(apis, args);
+          }
+          if (!args[0] || fromMap[args[0]]) {
+            args.unshift({
+              success: _utils__WEBPACK_IMPORTED_MODULE_0__.noop,
+              fail: _utils__WEBPACK_IMPORTED_MODULE_0__.noop
+            });
+          }
+          const options = args[0];
+          let returned;
+          const promise = new Promise((resolve, reject) => {
+            const originalSuccess = options.success;
+            const originalFail = options.fail;
+            options.success = function success(res) {
+              originalSuccess && originalSuccess.call(this, res);
+              resolve(res);
+            };
+            options.fail = function fail(res) {
+              originalFail && originalFail.call(this, res);
+              reject(res);
+            };
+            returned = apis[key].apply(envContext, args);
+          });
+          promise.__returned = returned;
+          return promise;
+        };
+        return map;
+      }, {});
+    }
+    function promisifyFilter(key) {
+      return /^get\w*Manager$/.test(key) || /^create\w*Context$/.test(key) || /^(on|off)/.test(key) || /\w+Sync$/.test(key);
+    }
   }
 ];
 var __webpack_module_cache__ = {};
@@ -357,7 +391,7 @@ var __authing_webpack_exports__ = {};
   var _AuthingMove_core__WEBPACK_IMPORTED_MODULE_0__ = __authing_webpack_require__(1);
   var _AuthingMove_api_proxy__WEBPACK_IMPORTED_MODULE_1__ = __authing_webpack_require__(5);
   _AuthingMove_core__WEBPACK_IMPORTED_MODULE_0__["default"].use(_AuthingMove_api_proxy__WEBPACK_IMPORTED_MODULE_1__["default"]);
-  AuthingMove.setStorage({
+  const storageRes = AuthingMove.setStorage({
     key: "setStorageKey",
     data: {
       a: 1,
@@ -366,16 +400,21 @@ var __authing_webpack_exports__ = {};
     success: (res) => {
       console.log("wx.setStorage success: ", res);
     }
+  }).then((res) => {
+    console.log("wx.setStorage then: ", res);
   });
-  AuthingMove.request({
+  console.log("storageRes: ", storageRes);
+  _AuthingMove_core__WEBPACK_IMPORTED_MODULE_0__["default"].request({
     url: "https://api.github.com/users/zhaoyiming0803",
     responseType: "text",
     success: (res) => {
-      console.log("wx.request success: ", res);
+      console.log("AuthingMove.request success: ", res);
     },
     fail: (res) => {
-      console.log("wx.request fail: ", res);
+      console.log("AuthingMove.request fail: ", res);
     }
+  }).then((res) => {
+    console.log("AuthingMove.request then: ", res);
   });
   AuthingMove.login({
     success: (res) => {

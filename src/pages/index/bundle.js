@@ -88,6 +88,8 @@
   /* harmony export */ });
   /* harmony import */ var _transform__WEBPACK_IMPORTED_MODULE_0__ = __authing_webpack_require__(6);
   /* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_1__ = __authing_webpack_require__(7);
+  /* harmony import */ var _promisify__WEBPACK_IMPORTED_MODULE_2__ = __authing_webpack_require__(14);
+  
   
   
   
@@ -104,14 +106,17 @@
       custom
     })
   
-    Object.keys(transformedApis).forEach(api => {
+    // reserve some expansion space
+    const apis = Object.assign({}, transformedApis, (0,_promisify__WEBPACK_IMPORTED_MODULE_2__.promisify)(transformedApis))
+  
+    Object.keys(apis).forEach(api => {
       try {
-        if (typeof transformedApis[api] !== 'function') {
-          AuthingMove[api] = transformedApis[api]
+        if (typeof apis[api] !== 'function') {
+          AuthingMove[api] = apis[api]
           return
         }
   
-        AuthingMove[api] = (...args) => transformedApis[api].apply(AuthingMove, args)
+        AuthingMove[api] = (...args) => apis[api].apply(AuthingMove, args)
       } catch (e) {
         (0,_utils__WEBPACK_IMPORTED_MODULE_1__.error)(`Call ${AuthingMove}.${api} error:` + JSON.stringify(e))
       }
@@ -206,7 +211,6 @@
   /* harmony export */   "handleSuccess": () => (/* binding */ handleSuccess),
   /* harmony export */   "makeMap": () => (/* binding */ makeMap),
   /* harmony export */   "noop": () => (/* binding */ noop),
-  /* harmony export */   "promisify": () => (/* binding */ promisify),
   /* harmony export */   "warn": () => (/* binding */ warn)
   /* harmony export */ });
   function getEnvContext () {
@@ -232,7 +236,7 @@
         return qa
       case 'qa_ux':
         return noopEnv
-      case 'taro':
+      case 'Taro':
         return Taro
       case 'uni':
         return uni
@@ -290,24 +294,6 @@
     originalOptions.success = res => cachedSuccess.call(_this, wrappedSuccess(res) || res)
   }
   
-  function promisify (api, options) {
-    return new Promise((resolve, reject) => {
-      const originalSuccess = options.success
-      const originalFail = options.fail
-  
-      options.success = function success (res) {
-        originalSuccess && originalSuccess.call(this, res)
-        resolve(res)
-      }
-  
-      options.fail = function fail (res) {
-        originalFail && originalFail.call(this, res)
-        reject(res)
-      }
-  
-      api(options)
-    })
-  }
   
   /***/ }),
   /* 8 */
@@ -418,7 +404,7 @@
   /* harmony export */ __authing_webpack_require__.d(__authing_webpack_exports__, {
   /* harmony export */   "supportedApis": () => (/* binding */ supportedApis)
   /* harmony export */ });
-  // base wx
+  // base wx in /apis directory
   const supportedApis = [
     'login',
     'request',
@@ -427,6 +413,75 @@
     'setStorage',
     'getStorage'
   ]
+  
+  
+  /***/ }),
+  /* 14 */
+  /***/ ((__unused_webpack_module, __authing_webpack_exports__, __authing_webpack_require__) => {
+  
+  __authing_webpack_require__.r(__authing_webpack_exports__);
+  /* harmony export */ __authing_webpack_require__.d(__authing_webpack_exports__, {
+  /* harmony export */   "promisify": () => (/* binding */ promisify)
+  /* harmony export */ });
+  /* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_0__ = __authing_webpack_require__(7);
+  
+  
+  const envContext = (0,_utils__WEBPACK_IMPORTED_MODULE_0__.getEnvContext)()
+  
+  function promisify (apis) {
+    const fromMap = (0,_utils__WEBPACK_IMPORTED_MODULE_0__.generateFromMap)()
+  
+    return Object.keys(apis).reduce((map, key) => {
+      if (typeof apis[key] !== 'function') {
+        return map
+      }
+  
+      map[key] = function (...args) {
+        if (promisifyFilter(key)) {
+          return apis[key].apply(apis, args)
+        }
+  
+        if (!args[0] || fromMap[args[0]]) {
+          args.unshift({
+            success: _utils__WEBPACK_IMPORTED_MODULE_0__.noop,
+            fail: _utils__WEBPACK_IMPORTED_MODULE_0__.noop
+          })
+        }
+  
+        const options = args[0]
+        let returned
+  
+        const promise = new Promise((resolve, reject) => {
+          const originalSuccess = options.success
+          const originalFail = options.fail
+  
+          options.success = function success (res) {
+            originalSuccess && originalSuccess.call(this, res)
+            resolve(res)
+          }
+  
+          options.fail = function fail (res) {
+            originalFail && originalFail.call(this, res)
+            reject(res)
+          }
+  
+          returned = apis[key].apply(envContext, args)
+        })
+  
+        promise.__returned = returned
+        return promise
+      }
+  
+      return map
+    }, {})
+  }
+  
+  function promisifyFilter (key) {
+    return /^get\w*Manager$/.test(key) ||
+      /^create\w*Context$/.test(key) ||
+      /^(on|off)/.test(key) ||
+      /\w+Sync$/.test(key)
+  }
   
   
   /***/ })
@@ -501,7 +556,7 @@
   
   _AuthingMove_core__WEBPACK_IMPORTED_MODULE_0__["default"].use(_AuthingMove_api_proxy__WEBPACK_IMPORTED_MODULE_1__["default"])
   
-  /* AuthingMove replacement */AuthingMove.setStorage({
+  const storageRes = /* AuthingMove replacement */AuthingMove.setStorage({
     key: 'setStorageKey',
     data: {
       a: 1,
@@ -510,7 +565,11 @@
     success: res => {
       console.log('wx.setStorage success: ', res)
     }
+  }).then(res => {
+    console.log('wx.setStorage then: ', res)
   })
+  
+  console.log('storageRes: ', storageRes)
   
   // wx.scanCode({
   //   success: res => {
@@ -518,15 +577,17 @@
   //   }
   // })
   
-  /* AuthingMove replacement */AuthingMove.request({
+  _AuthingMove_core__WEBPACK_IMPORTED_MODULE_0__["default"].request({
     url: 'https://api.github.com/users/zhaoyiming0803',
     responseType: 'text',
     success: res => {
-      console.log('wx.request success: ', res)
+      console.log('AuthingMove.request success: ', res)
     },
     fail: res => {
-      console.log('wx.request fail: ', res)
+      console.log('AuthingMove.request fail: ', res)
     }
+  }).then(res => {
+    console.log('AuthingMove.request then: ', res)
   })
   
   /* AuthingMove replacement */AuthingMove.login({
