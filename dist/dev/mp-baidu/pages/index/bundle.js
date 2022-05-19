@@ -152,7 +152,7 @@ var __webpack_modules__ = [
     });
     var _runtime_env__WEBPACK_IMPORTED_MODULE_0__ = __authing_webpack_require__2(8);
     function generateFromMap() {
-      const platforms = ["wx", "ali", "baidu", "qq", "tt", "jd", "ks", "qa_webview", "qa_ux", "Mpx", "taro", "uni"];
+      const platforms = ["wx", "ali", "baidu", "qq", "tt", "jd", "ks", "qa_webview", "qa_ux", "Mpx", "Taro", "uni"];
       return platforms.reduce((map, platform) => {
         map[`__authing_move_src_mode_${platform}__`] = platform;
         return map;
@@ -401,7 +401,8 @@ var __authing_webpack_exports__ = {};
     key: "setStorageKey",
     data: {
       a: 1,
-      b: 2
+      b: 2,
+      c: 3
     },
     success: (res) => {
       console.log("wx.setStorage success: ", res);

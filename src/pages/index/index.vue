@@ -14,6 +14,8 @@ import { ref } from 'vue'
 const title = ref('Hello')
 
 console.log('Authing: ', Object.keys(AuthingMove))
+console.log('uni: ', uni)
+console.log('uni keys: ', Object.keys(uni))
 
 uni.setStorage({
   key: '12321',

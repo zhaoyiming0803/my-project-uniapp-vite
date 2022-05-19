@@ -1,19 +1,25 @@
 {
-  "appid": "touristappid",
-  "compilation-args": {
-    "common": {
-      "babelSetting": {
-        "ignore": []
-      },
-      "enhance": true,
-      "ignorePrefixCss": false
+    "appid": "17767960",
+    "compilation-args": {
+        "common": {
+            "babelSetting": {
+                "ignore": []
+            },
+            "enhance": true,
+            "ignorePrefixCss": false
+        },
+        "selected": -3
     },
-    "selected": -3
-  },
-  "host": "baiduboxapp",
-  "projectname": "",
-  "setting": {
-    "autoAudits": false,
-    "urlCheck": false
-  }
+    "host": "baiduboxapp",
+    "projectname": "mp-baidu",
+    "setting": {
+        "autoAudits": false,
+        "urlCheck": false
+    },
+    "swan": {
+        "baiduboxapp": {
+            "swanJsVersion": "3.450.14",
+            "extensionJsVersion": "1.21.2"
+        }
+    }
 }

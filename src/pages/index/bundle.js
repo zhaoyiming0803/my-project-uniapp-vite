@@ -216,7 +216,7 @@
   
   
   function generateFromMap () {
-    const platforms = ['wx', 'ali', 'baidu', 'qq', 'tt', 'jd', 'ks', 'qa_webview', 'qa_ux', 'Mpx', 'taro', 'uni']
+    const platforms = ['wx', 'ali', 'baidu', 'qq', 'tt', 'jd', 'ks', 'qa_webview', 'qa_ux', 'Mpx', 'Taro', 'uni']
     return platforms.reduce((map, platform) => {
       map[`__authing_move_src_mode_${platform}__`] = platform
       return map
@@ -571,7 +571,8 @@
     key: 'setStorageKey',
     data: {
       a: 1,
-      b: 2
+      b: 2,
+      c: 3
     },
     success: res => {
       console.log('wx.setStorage success: ', res)
