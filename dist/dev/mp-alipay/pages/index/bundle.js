@@ -2,38 +2,37 @@
 var common_vendor = require("../../common/vendor.js");
 var __webpack_modules__ = [
   ,
-  (__unused_webpack_module, __webpack_exports_authing__2, __webpack_require_authing__2) => {
-    __webpack_require_authing__2.r(__webpack_exports_authing__2);
-    __webpack_require_authing__2.d(__webpack_exports_authing__2, {
+  (__unused_webpack_module, __authing_webpack_exports__2, __authing_webpack_require__2) => {
+    __authing_webpack_require__2.r(__authing_webpack_exports__2);
+    __authing_webpack_require__2.d(__authing_webpack_exports__2, {
       "default": () => __WEBPACK_DEFAULT_EXPORT__
     });
-    var _instance__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require_authing__2(2);
-    var _global_api__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require_authing__2(3);
+    var _instance__WEBPACK_IMPORTED_MODULE_0__ = __authing_webpack_require__2(2);
+    var _global_api__WEBPACK_IMPORTED_MODULE_1__ = __authing_webpack_require__2(3);
     (0, _global_api__WEBPACK_IMPORTED_MODULE_1__.initGlobalApi)(_instance__WEBPACK_IMPORTED_MODULE_0__["default"]);
-    _instance__WEBPACK_IMPORTED_MODULE_0__["default"].version = "0.0.1-alpha.0";
     const __WEBPACK_DEFAULT_EXPORT__ = _instance__WEBPACK_IMPORTED_MODULE_0__["default"];
   },
-  (__unused_webpack_module, __webpack_exports_authing__2, __webpack_require_authing__2) => {
-    __webpack_require_authing__2.r(__webpack_exports_authing__2);
-    __webpack_require_authing__2.d(__webpack_exports_authing__2, {
+  (__unused_webpack_module, __authing_webpack_exports__2, __authing_webpack_require__2) => {
+    __authing_webpack_require__2.r(__authing_webpack_exports__2);
+    __authing_webpack_require__2.d(__authing_webpack_exports__2, {
       "default": () => AuthingMove
     });
     function AuthingMove() {
     }
   },
-  (__unused_webpack_module, __webpack_exports_authing__2, __webpack_require_authing__2) => {
-    __webpack_require_authing__2.r(__webpack_exports_authing__2);
-    __webpack_require_authing__2.d(__webpack_exports_authing__2, {
+  (__unused_webpack_module, __authing_webpack_exports__2, __authing_webpack_require__2) => {
+    __authing_webpack_require__2.r(__authing_webpack_exports__2);
+    __authing_webpack_require__2.d(__authing_webpack_exports__2, {
       "initGlobalApi": () => initGlobalApi
     });
-    var _use__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require_authing__2(4);
+    var _use__WEBPACK_IMPORTED_MODULE_0__ = __authing_webpack_require__2(4);
     function initGlobalApi(AuthingMove) {
       (0, _use__WEBPACK_IMPORTED_MODULE_0__.initUse)(AuthingMove);
     }
   },
-  (__unused_webpack_module, __webpack_exports_authing__2, __webpack_require_authing__2) => {
-    __webpack_require_authing__2.r(__webpack_exports_authing__2);
-    __webpack_require_authing__2.d(__webpack_exports_authing__2, {
+  (__unused_webpack_module, __authing_webpack_exports__2, __authing_webpack_require__2) => {
+    __authing_webpack_require__2.r(__authing_webpack_exports__2);
+    __authing_webpack_require__2.d(__authing_webpack_exports__2, {
       "initUse": () => initUse
     });
     function initUse(AuthingMove) {
@@ -54,47 +53,46 @@ var __webpack_modules__ = [
       };
     }
   },
-  (__unused_webpack_module, __webpack_exports_authing__2, __webpack_require_authing__2) => {
-    __webpack_require_authing__2.r(__webpack_exports_authing__2);
-    __webpack_require_authing__2.d(__webpack_exports_authing__2, {
+  (__unused_webpack_module, __authing_webpack_exports__2, __authing_webpack_require__2) => {
+    __authing_webpack_require__2.r(__authing_webpack_exports__2);
+    __authing_webpack_require__2.d(__authing_webpack_exports__2, {
       "default": () => install
     });
-    var _transform__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require_authing__2(6);
-    var _utils__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require_authing__2(7);
+    var _transform__WEBPACK_IMPORTED_MODULE_0__ = __authing_webpack_require__2(6);
+    var _utils__WEBPACK_IMPORTED_MODULE_1__ = __authing_webpack_require__2(7);
+    var _promisify__WEBPACK_IMPORTED_MODULE_2__ = __authing_webpack_require__2(14);
     function install(AuthingMove, options = {}) {
       const {
         custom = {}
       } = options;
       const from = "wx";
-      const to = "ali";
-      if (["uni"].includes(to)) {
-        return;
-      }
-      const transformedApi = (0, _transform__WEBPACK_IMPORTED_MODULE_0__["default"])({
+      const to = "uni";
+      const transformedApis = (0, _transform__WEBPACK_IMPORTED_MODULE_0__["default"])({
         from,
         to,
         custom
       });
-      Object.keys(transformedApi).forEach((api) => {
+      const apis = Object.assign({}, transformedApis, (0, _promisify__WEBPACK_IMPORTED_MODULE_2__.promisify)(transformedApis));
+      Object.keys(apis).forEach((api) => {
         try {
-          if (typeof transformedApi[api] !== "function") {
-            AuthingMove[api] = transformedApi[api];
+          if (typeof apis[api] !== "function") {
+            AuthingMove[api] = apis[api];
             return;
           }
-          AuthingMove[api] = (...args) => transformedApi[api].apply(AuthingMove, args);
+          AuthingMove[api] = (...args) => apis[api].apply(AuthingMove, args);
         } catch (e) {
           (0, _utils__WEBPACK_IMPORTED_MODULE_1__.error)(`Call ${AuthingMove}.${api} error:` + JSON.stringify(e));
         }
       });
     }
   },
-  (__unused_webpack_module, __webpack_exports_authing__2, __webpack_require_authing__2) => {
-    __webpack_require_authing__2.r(__webpack_exports_authing__2);
-    __webpack_require_authing__2.d(__webpack_exports_authing__2, {
+  (__unused_webpack_module, __authing_webpack_exports__2, __authing_webpack_require__2) => {
+    __authing_webpack_require__2.r(__authing_webpack_exports__2);
+    __authing_webpack_require__2.d(__authing_webpack_exports__2, {
       "default": () => transformApi
     });
-    var _utils__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require_authing__2(7);
-    var _apis__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require_authing__2(8);
+    var _utils__WEBPACK_IMPORTED_MODULE_0__ = __authing_webpack_require__2(7);
+    var _apis__WEBPACK_IMPORTED_MODULE_1__ = __authing_webpack_require__2(9);
     const fromMap = (0, _utils__WEBPACK_IMPORTED_MODULE_0__.generateFromMap)();
     function joinName(from = "", to = "") {
       const _from = `__authing_move_src_mode_${from}__`;
@@ -103,7 +101,7 @@ var __webpack_modules__ = [
     function transformApi(options) {
       const envContext = (0, _utils__WEBPACK_IMPORTED_MODULE_0__.getEnvContext)();
       const needProxy = /* @__PURE__ */ Object.create(null);
-      Object.keys(envContext).concat(Object.keys(_apis__WEBPACK_IMPORTED_MODULE_1__)).forEach((key) => {
+      Object.keys(_apis__WEBPACK_IMPORTED_MODULE_1__).forEach((key) => {
         needProxy[key] = envContext[key] || _apis__WEBPACK_IMPORTED_MODULE_1__[key];
       });
       const apis = /* @__PURE__ */ Object.create(null);
@@ -132,53 +130,27 @@ var __webpack_modules__ = [
           if (envContext[api]) {
             return envContext[api].apply(this, args);
           }
-          (0, _utils__WEBPACK_IMPORTED_MODULE_0__.error)(`\u5F53\u524D\u5C0F\u7A0B\u5E8F\u73AF\u5883\u4E0D\u5B58\u5728 ${api} \u65B9\u6CD5`);
+          (0, _utils__WEBPACK_IMPORTED_MODULE_0__.error)(`"${api}" method does not exist in the current context`);
         };
       });
       return apis;
     }
   },
-  (__unused_webpack_module, __webpack_exports_authing__2, __webpack_require_authing__2) => {
-    __webpack_require_authing__2(1).default;
-    __webpack_require_authing__2.r(__webpack_exports_authing__2);
-    __webpack_require_authing__2.d(__webpack_exports_authing__2, {
-      "adaptOptions": () => adaptOptions2,
+  (__unused_webpack_module, __authing_webpack_exports__2, __authing_webpack_require__2) => {
+    __authing_webpack_require__2.r(__authing_webpack_exports__2);
+    __authing_webpack_require__2.d(__authing_webpack_exports__2, {
+      "adaptOptions": () => adaptOptions,
       "error": () => error,
       "generateFromMap": () => generateFromMap,
-      "getEnvContext": () => getEnvContext,
-      "handleSuccess": () => handleSuccess2,
+      "getEnvContext": () => _runtime_env__WEBPACK_IMPORTED_MODULE_0__.getEnvContext,
+      "handleSuccess": () => handleSuccess,
       "makeMap": () => makeMap,
       "noop": () => noop,
       "warn": () => warn
     });
-    function getEnvContext() {
-      const noopEnv = {};
-      switch ("ali") {
-        case "wx":
-        case "Mpx":
-          return my;
-        case "ali":
-          return my;
-        case "baidu":
-          return swan;
-        case "qq":
-          return qq;
-        case "tt":
-          return tt;
-        case "jd":
-          return jd;
-        case "qa_webview":
-          return qa;
-        case "qa_ux":
-          return noopEnv;
-        case "Taro":
-          return Taro;
-        case "uni":
-          return common_vendor.index;
-      }
-    }
+    var _runtime_env__WEBPACK_IMPORTED_MODULE_0__ = __authing_webpack_require__2(8);
     function generateFromMap() {
-      const platforms = ["wx", "ali", "baidu", "qq", "tt", "jd", "qa_webview", "qa_ux"];
+      const platforms = ["wx", "ali", "baidu", "qq", "tt", "jd", "ks", "qa_webview", "qa_ux", "Mpx", "Taro", "uni"];
       return platforms.reduce((map, platform) => {
         map[`__authing_move_src_mode_${platform}__`] = platform;
         return map;
@@ -191,16 +163,16 @@ var __webpack_modules__ = [
       }, {});
     }
     function warn(message) {
-      console.warn && console.warn(`[AuthingMove/api-proxy warn]:
+      console.warn && console.warn(`[AuthingMove/api-proxy warn in "${"uni"}"]:
  ${message}`);
     }
     function error(message) {
-      console.error && console.error(`[AuthingMove/api-proxy error]:
+      console.error && console.error(`[AuthingMove/api-proxy error in "${"uni"}"]:
  ${message}`);
     }
     function noop() {
     }
-    function adaptOptions2(originalOptions, matchedOptions, extraOptions) {
+    function adaptOptions(originalOptions, matchedOptions = {}, extraOptions = {}) {
       let options = {};
       Object.keys(originalOptions).forEach((key) => {
         const _key = matchedOptions.hasOwnProperty(key) ? matchedOptions[key] : key;
@@ -211,7 +183,7 @@ var __webpack_modules__ = [
       options = Object.assign({}, options, extraOptions);
       return options;
     }
-    function handleSuccess2(originalOptions, wrappedSuccess = noop, context) {
+    function handleSuccess(originalOptions, wrappedSuccess = noop, context) {
       if (!originalOptions.success) {
         return;
       }
@@ -220,122 +192,169 @@ var __webpack_modules__ = [
       originalOptions.success = (res) => cachedSuccess.call(_this, wrappedSuccess(res) || res);
     }
   },
-  (__unused_webpack_module, __webpack_exports_authing__2, __webpack_require_authing__2) => {
-    __webpack_require_authing__2.r(__webpack_exports_authing__2);
-    __webpack_require_authing__2.d(__webpack_exports_authing__2, {
-      "clearStorage": () => _store_storage__WEBPACK_IMPORTED_MODULE_3__.clearStorage,
+  (__unused_webpack_module, __authing_webpack_exports__2, __authing_webpack_require__2) => {
+    __authing_webpack_require__2.r(__authing_webpack_exports__2);
+    __authing_webpack_require__2.d(__authing_webpack_exports__2, {
+      "getEnvContext": () => getEnvContext
+    });
+    function getEnvContext() {
+      const noopEnv = {};
+      switch ("uni") {
+        case "wx":
+        case "Mpx":
+          return wx;
+        case "ali":
+          return my;
+        case "baidu":
+          return swan;
+        case "qq":
+          return qq;
+        case "tt":
+          return tt;
+        case "jd":
+          return jd;
+        case "ks":
+          return ks;
+        case "qa_webview":
+          return qa;
+        case "qa_ux":
+          return noopEnv;
+        case "Taro":
+          return Taro;
+        case "uni":
+          return common_vendor.index;
+      }
+    }
+  },
+  (__unused_webpack_module, __authing_webpack_exports__2, __authing_webpack_require__2) => {
+    __authing_webpack_require__2.r(__authing_webpack_exports__2);
+    __authing_webpack_require__2.d(__authing_webpack_exports__2, {
+      "clearStorage": () => _storage_storage__WEBPACK_IMPORTED_MODULE_3__.clearStorage,
+      "getStorage": () => _storage_storage__WEBPACK_IMPORTED_MODULE_3__.getStorage,
       "login": () => _login_login__WEBPACK_IMPORTED_MODULE_0__.login,
+      "removeStorage": () => _storage_storage__WEBPACK_IMPORTED_MODULE_3__.removeStorage,
       "request": () => _network_request__WEBPACK_IMPORTED_MODULE_1__.request,
       "scanCode": () => _scan_scan__WEBPACK_IMPORTED_MODULE_2__.scanCode,
-      "setStorage": () => _store_storage__WEBPACK_IMPORTED_MODULE_3__.setStorage
+      "setStorage": () => _storage_storage__WEBPACK_IMPORTED_MODULE_3__.setStorage
     });
-    var _login_login__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require_authing__2(9);
-    var _network_request__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require_authing__2(10);
-    var _scan_scan__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require_authing__2(11);
-    var _store_storage__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require_authing__2(12);
+    var _login_login__WEBPACK_IMPORTED_MODULE_0__ = __authing_webpack_require__2(10);
+    var _network_request__WEBPACK_IMPORTED_MODULE_1__ = __authing_webpack_require__2(11);
+    var _scan_scan__WEBPACK_IMPORTED_MODULE_2__ = __authing_webpack_require__2(12);
+    var _storage_storage__WEBPACK_IMPORTED_MODULE_3__ = __authing_webpack_require__2(13);
   },
-  (__unused_webpack_module, __webpack_exports_authing__2, __webpack_require_authing__2) => {
-    __webpack_require_authing__2.r(__webpack_exports_authing__2);
-    __webpack_require_authing__2.d(__webpack_exports_authing__2, {
+  (__unused_webpack_module, __authing_webpack_exports__2, __authing_webpack_require__2) => {
+    __authing_webpack_require__2.r(__authing_webpack_exports__2);
+    __authing_webpack_require__2.d(__authing_webpack_exports__2, {
       "login": () => login
     });
+    var _utils__WEBPACK_IMPORTED_MODULE_0__ = __authing_webpack_require__2(7);
+    const envContext = (0, _utils__WEBPACK_IMPORTED_MODULE_0__.getEnvContext)();
     function login(options = {}) {
-      const _options = adaptOptions(options);
-      handleSuccess(_options, (res) => {
-        return adaptOptions(res, {
-          authCode: "code"
-        });
-      });
-      return my.getAuthCode(_options);
+      return envContext.login(options);
     }
   },
-  (__unused_webpack_module, __webpack_exports_authing__2, __webpack_require_authing__2) => {
-    __webpack_require_authing__2.r(__webpack_exports_authing__2);
-    __webpack_require_authing__2.d(__webpack_exports_authing__2, {
+  (__unused_webpack_module, __authing_webpack_exports__2, __authing_webpack_require__2) => {
+    __authing_webpack_require__2.r(__authing_webpack_exports__2);
+    __authing_webpack_require__2.d(__authing_webpack_exports__2, {
       "request": () => request
     });
-    var _utils__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require_authing__2(7);
+    var _utils__WEBPACK_IMPORTED_MODULE_0__ = __authing_webpack_require__2(7);
+    const envContext = (0, _utils__WEBPACK_IMPORTED_MODULE_0__.getEnvContext)();
     function request(options = {}) {
-      const _options = (0, _utils__WEBPACK_IMPORTED_MODULE_0__.adaptOptions)(options, {
-        header: "headers"
-      });
-      (0, _utils__WEBPACK_IMPORTED_MODULE_0__.handleSuccess)(_options, (res) => {
-        return (0, _utils__WEBPACK_IMPORTED_MODULE_0__.adaptOptions)(res, {
-          Headers: "header",
-          status: "statusCode"
-        });
-      });
-      if (my.canIUse("request")) {
-        return my.request(_options);
-      }
-      return my.httpRequest(_options);
+      return envContext.request(options);
     }
   },
-  (__unused_webpack_module, __webpack_exports_authing__2, __webpack_require_authing__2) => {
-    __webpack_require_authing__2.r(__webpack_exports_authing__2);
-    __webpack_require_authing__2.d(__webpack_exports_authing__2, {
+  (__unused_webpack_module, __authing_webpack_exports__2, __authing_webpack_require__2) => {
+    __authing_webpack_require__2.r(__authing_webpack_exports__2);
+    __authing_webpack_require__2.d(__authing_webpack_exports__2, {
       "scanCode": () => scanCode
     });
-    var _utils__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require_authing__2(7);
-    function scanCode(options) {
-      const _options = (0, _utils__WEBPACK_IMPORTED_MODULE_0__.adaptOptions)(options, {
-        onlyFromCamera: "hideAlbum",
-        scanType: "type"
-      });
-      const typeMap = {
-        barCode: "bar",
-        qrCode: "qr"
-      };
-      if (_options.type) {
-        const _type = typeMap[_options.type];
-        if (_type) {
-          _options.type = _type;
-        } else {
-          (0, _utils__WEBPACK_IMPORTED_MODULE_0__.error)("\u652F\u4ED8\u5B9D\u5C0F\u7A0B\u5E8F\u53EA\u80FD\u626B\u63CF\u3010\u6761\u5F62\u7801\u3011\u548C\u3010\u4E8C\u7EF4\u7801\u3011\uFF0C\u8BF7\u5C06 type \u8BBE\u7F6E\u4E3A barCode \u6216 qrCode !!!");
-          _options.type = "qr";
-        }
-      }
-      (0, _utils__WEBPACK_IMPORTED_MODULE_0__.handleSuccess)(_options, (res) => {
-        return (0, _utils__WEBPACK_IMPORTED_MODULE_0__.adaptOptions)(res, {
-          code: "result"
-        });
-      });
-      return my.scan(_options);
+    var _utils__WEBPACK_IMPORTED_MODULE_0__ = __authing_webpack_require__2(7);
+    const envContext = (0, _utils__WEBPACK_IMPORTED_MODULE_0__.getEnvContext)();
+    function scanCode(options = {}) {
+      return envContext.scanCode(options);
     }
   },
-  (__unused_webpack_module, __webpack_exports_authing__2, __webpack_require_authing__2) => {
-    __webpack_require_authing__2.r(__webpack_exports_authing__2);
-    __webpack_require_authing__2.d(__webpack_exports_authing__2, {
+  (__unused_webpack_module, __authing_webpack_exports__2, __authing_webpack_require__2) => {
+    __authing_webpack_require__2.r(__authing_webpack_exports__2);
+    __authing_webpack_require__2.d(__authing_webpack_exports__2, {
       "clearStorage": () => clearStorage,
+      "getStorage": () => getStorage,
+      "removeStorage": () => removeStorage,
       "setStorage": () => setStorage
     });
-    function setStorage(options) {
-      return my.setStorage(options);
+    var _utils__WEBPACK_IMPORTED_MODULE_0__ = __authing_webpack_require__2(7);
+    const envContext = (0, _utils__WEBPACK_IMPORTED_MODULE_0__.getEnvContext)();
+    function setStorage(options = {}) {
+      const _options = (0, _utils__WEBPACK_IMPORTED_MODULE_0__.adaptOptions)(options, {}, {
+        encrypt: false
+      });
+      return envContext.setStorage(_options);
     }
-    function clearStorage() {
-      return my.clearStorage();
+    function getStorage(options = {}) {
+      const _options = (0, _utils__WEBPACK_IMPORTED_MODULE_0__.adaptOptions)(options, {}, {
+        encrypt: false
+      });
+      return envContext.getStorage(_options);
+    }
+    function removeStorage(options = {}) {
+      return envContext.removeStorage(options);
+    }
+    function clearStorage(options = {}) {
+      return envContext.clearStorage(options);
     }
   },
-  (__unused_webpack_module, __webpack_exports_authing__2, __webpack_require_authing__2) => {
-    __webpack_require_authing__2(1).default;
-    __webpack_require_authing__2.r(__webpack_exports_authing__2);
-    __webpack_require_authing__2.d(__webpack_exports_authing__2, {
-      "callStorage": () => callStorage,
-      "funcA": () => funcA
+  (__unused_webpack_module, __authing_webpack_exports__2, __authing_webpack_require__2) => {
+    __authing_webpack_require__2.r(__authing_webpack_exports__2);
+    __authing_webpack_require__2.d(__authing_webpack_exports__2, {
+      "promisify": () => promisify
     });
-    function funcA() {
-      return "this is function A";
+    var _utils__WEBPACK_IMPORTED_MODULE_0__ = __authing_webpack_require__2(7);
+    const envContext = (0, _utils__WEBPACK_IMPORTED_MODULE_0__.getEnvContext)();
+    function promisify(apis) {
+      const fromMap = (0, _utils__WEBPACK_IMPORTED_MODULE_0__.generateFromMap)();
+      return Object.keys(apis).reduce((map, key) => {
+        if (typeof apis[key] !== "function") {
+          return map;
+        }
+        map[key] = function(...args) {
+          if (promisifyFilter(key)) {
+            return apis[key].apply(apis, args);
+          }
+          if (!args[0] || fromMap[args[0]]) {
+            args.unshift({
+              success: _utils__WEBPACK_IMPORTED_MODULE_0__.noop,
+              fail: _utils__WEBPACK_IMPORTED_MODULE_0__.noop
+            });
+          }
+          const options = args[0];
+          let returned;
+          const promise = new Promise((resolve, reject) => {
+            const originalSuccess = options.success;
+            const originalFail = options.fail;
+            options.success = function success(res) {
+              originalSuccess && originalSuccess.call(this, res);
+              resolve(res);
+            };
+            options.fail = function fail(res) {
+              originalFail && originalFail.call(this, res);
+              reject(res);
+            };
+            returned = apis[key].apply(envContext, args);
+          });
+          promise.__returned = returned;
+          return promise;
+        };
+        return map;
+      }, {});
     }
-    function callStorage() {
-      my.setStorage({
-        key: "callStorage",
-        data: "callStorage"
-      });
+    function promisifyFilter(key) {
+      return /^get\w*Manager$/.test(key) || /^create\w*Context$/.test(key) || /^(on|off)/.test(key) || /\w+Sync$/.test(key);
     }
   }
 ];
 var __webpack_module_cache__ = {};
-function __webpack_require_authing__(moduleId) {
+function __authing_webpack_require__(moduleId) {
   var cachedModule = __webpack_module_cache__[moduleId];
   if (cachedModule !== void 0) {
     return cachedModule.exports;
@@ -343,47 +362,71 @@ function __webpack_require_authing__(moduleId) {
   var module = __webpack_module_cache__[moduleId] = {
     exports: {}
   };
-  __webpack_modules__[moduleId](module, module.exports, __webpack_require_authing__);
+  __webpack_modules__[moduleId](module, module.exports, __authing_webpack_require__);
   return module.exports;
 }
 (() => {
-  __webpack_require_authing__.d = (exports2, definition) => {
+  __authing_webpack_require__.d = (exports2, definition) => {
     for (var key in definition) {
-      if (__webpack_require_authing__.o(definition, key) && !__webpack_require_authing__.o(exports2, key)) {
+      if (__authing_webpack_require__.o(definition, key) && !__authing_webpack_require__.o(exports2, key)) {
         Object.defineProperty(exports2, key, { enumerable: true, get: definition[key] });
       }
     }
   };
 })();
 (() => {
-  __webpack_require_authing__.o = (obj, prop) => Object.prototype.hasOwnProperty.call(obj, prop);
+  __authing_webpack_require__.o = (obj, prop) => Object.prototype.hasOwnProperty.call(obj, prop);
 })();
 (() => {
-  __webpack_require_authing__.r = (exports2) => {
+  __authing_webpack_require__.r = (exports2) => {
     if (typeof Symbol !== "undefined" && Symbol.toStringTag) {
       Object.defineProperty(exports2, Symbol.toStringTag, { value: "Module" });
     }
     Object.defineProperty(exports2, "__esModule", { value: true });
   };
 })();
-var __webpack_exports_authing__ = {};
+var __authing_webpack_exports__ = {};
 (() => {
-  __webpack_require_authing__(1).default;
-  __webpack_require_authing__.r(__webpack_exports_authing__);
-  __webpack_require_authing__.d(__webpack_exports_authing__, {
+  __authing_webpack_require__.r(__authing_webpack_exports__);
+  __authing_webpack_require__.d(__authing_webpack_exports__, {
     "default": () => __WEBPACK_DEFAULT_EXPORT__
   });
-  var _AuthingMove_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require_authing__(1);
-  var _AuthingMove_api_proxy__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require_authing__(5);
-  var _a__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require_authing__(13);
-  _AuthingMove_core__WEBPACK_IMPORTED_MODULE_0__["default"].use(_AuthingMove_api_proxy__WEBPACK_IMPORTED_MODULE_1__["default"]);
-  _AuthingMove_core__WEBPACK_IMPORTED_MODULE_0__["default"].funcA = _a__WEBPACK_IMPORTED_MODULE_2__.funcA;
-  my.setStorage({
-    key: "hello11111111",
-    data: "123hello"
+  var _authing_authingmove_core__WEBPACK_IMPORTED_MODULE_0__ = __authing_webpack_require__(1);
+  var _authing_authingmove_api_proxy__WEBPACK_IMPORTED_MODULE_1__ = __authing_webpack_require__(5);
+  _authing_authingmove_core__WEBPACK_IMPORTED_MODULE_0__["default"].use(_authing_authingmove_api_proxy__WEBPACK_IMPORTED_MODULE_1__["default"]);
+  const storageRes = _authing_authingmove_core__WEBPACK_IMPORTED_MODULE_0__["default"].setStorage({
+    key: "setStorageKey",
+    data: {
+      a: 1,
+      b: 2,
+      c: 3,
+      d: 4,
+      e: 5
+    },
+    success: (res) => {
+      console.log("AuthingMove.setStorage success: ", res);
+    }
   });
-  (0, _a__WEBPACK_IMPORTED_MODULE_2__.callStorage)();
-  const __WEBPACK_DEFAULT_EXPORT__ = _AuthingMove_core__WEBPACK_IMPORTED_MODULE_0__["default"];
+  console.log("storageRes: ", storageRes);
+  _authing_authingmove_core__WEBPACK_IMPORTED_MODULE_0__["default"].getStorage({
+    key: "ssdf"
+  }).then((res) => {
+    console.log("AuthingMove.getStorage then: ", res);
+  }).catch((res) => {
+    console.log("AuthingMove.getStorage catch: ", res);
+  });
+  _authing_authingmove_core__WEBPACK_IMPORTED_MODULE_0__["default"].request({
+    url: "https://api.github.com/users/zhaoyiming0803",
+    responseType: "text"
+  }).then((res) => {
+    console.log("AuthingMove.request then: ", res);
+  });
+  _authing_authingmove_core__WEBPACK_IMPORTED_MODULE_0__["default"].login({
+    success: (res) => {
+      console.log("-------: ", res);
+    }
+  });
+  const __WEBPACK_DEFAULT_EXPORT__ = {};
 })();
-var __webpack_exports_authing__default = __webpack_exports_authing__["default"];
-exports.__webpack_exports_authing__default = __webpack_exports_authing__default;
+var __authing_webpack_exports__default = __authing_webpack_exports__["default"];
+exports.__authing_webpack_exports__default = __authing_webpack_exports__default;
